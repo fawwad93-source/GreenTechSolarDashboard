@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Green Tech Solar - professional global solar PV benchmarking, system sizing, ROI, energy audit and low-carbon building tools.">
+<title>Green Tech Solar &mdash; Solar &amp; Renewable Energy Intelligence Platform</title>
+<style>
+:root{
+  --green:#0f7a4f; --green-dark:#0b5b3b; --green-mid:#2fa874; --green-light:#e8f4ee;
+  --accent:#0e7490; --ink:#13241d; --muted:#5a6a63; --line:#e1e9e5; --bg:#f4f8f6; --white:#fff;
+  --slate:#1b2b33; --warn:#c98a04; --bad:#c0392b; --good:#0f7a4f;
+  --shadow:0 4px 18px rgba(15,70,45,.07); --shadow-lg:0 12px 40px rgba(15,70,45,.12);
+  --radius:14px; --radius-sm:9px;
+  --sans:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  --serif:Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:15px}
+h1,h2,h3,h4{line-height:1.2;margin:0 0 .4em}
+a{color:var(--green-dark);text-decoration:none}
+.container{max-width:1180px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:none;
+  padding:12px 22px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+.btn:hover{background:var(--green-dark)}
+.btn.ghost{background:transparent;color:var(--green-dark);border:1.5px solid var(--green)}
+.btn.ghost:hover{background:var(--green-light)}
+.btn.sm{padding:8px 14px;font-size:13px}
+.btn.block{width:100%;justify-content:center}
+
+/* Utility bar */
+.util{background:var(--slate);color:#bcd6cc;font-size:12.5px}
+.util .container{display:flex;justify-content:space-between;align-items:center;height:34px;flex-wrap:wrap}
+.util b{color:#fff}
+.util .regions span{margin-left:14px;opacity:.85}
+
+/* Header */
+header.top{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .logo{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--green-mid),var(--green-dark));
+  display:grid;place-items:center;color:#fff;font-weight:900;font-size:20px;box-shadow:var(--shadow)}
+.brand .bn{font-weight:800;font-size:19px;letter-spacing:-.2px}
+.brand .bt{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.hbtns{display:flex;gap:10px}
+@media(max-width:680px){.hbtns{display:none}}
+
+/* Tab bar */
+.tabbar{position:sticky;top:66px;z-index:55;background:linear-gradient(180deg,#fff,#fbfdfc);border-bottom:1px solid var(--line)}
+.tabbar .inner{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.tabbar button{flex:0 0 auto;background:none;border:none;border-bottom:3px solid transparent;padding:15px 16px;
+  font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;font-family:inherit;transition:.12s}
+.tabbar button:hover{color:var(--green-dark);background:var(--green-light)}
+.tabbar button.active{color:var(--green-dark);border-bottom-color:var(--green)}
+.tabbar button .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--green-light);
+  color:var(--green-dark);font-size:11px;margin-right:7px;font-weight:800}
+.tabbar button.active .n{background:var(--green);color:#fff}
+
+/* Panels */
+.panel{display:none;padding:34px 0 60px;animation:fade .25s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.phead{max-width:820px;margin-bottom:26px;border-left:4px solid var(--green);padding-left:16px}
+.phead .tag{color:var(--green);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.phead h2{font-size:28px;margin:5px 0 6px}
+.phead p{color:var(--muted);font-size:15.5px;margin:0}
+
+/* Cards / layout */
+.grid{display:grid;gap:18px}
+.c2{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.split{display:grid;grid-template-columns:1fr 1.05fr;gap:22px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card h3{font-size:17px}
+.card .ico{width:42px;height:42px;border-radius:10px;background:var(--green-light);color:var(--green-dark);
+  display:grid;place-items:center;font-size:21px;margin-bottom:11px}
+.card p{color:var(--muted);font-size:13.5px;margin:0}
+.tool{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.tool h3{font-size:19px;margin-bottom:3px}
+.tool .sub{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+
+/* Forms */
+.field{margin-bottom:13px}
+.field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #d3ded8;border-radius:8px;
+  font-size:14px;font-family:inherit;background:#fff;transition:.12s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-light)}
+.field .hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 14px}
+
+/* Results */
+.result{margin-top:18px;padding:18px;border-radius:var(--radius-sm);background:var(--green-light);border:1px solid #cce7d9}
+.result.hidden{display:none}
+.kpi-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.kpi{flex:1;min-width:128px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px}
+.kpi .v{font-size:23px;font-weight:800;color:var(--green-dark);line-height:1.1}
+.kpi .l{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:3px}
+.bar{height:13px;border-radius:7px;background:#e3ebe7;overflow:hidden;margin:6px 0}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--green-mid),var(--green-dark))}
+.rate{display:inline-block;padding:4px 12px;border-radius:6px;font-weight:700;font-size:12.5px;color:#fff}
+.rate.exc{background:#0f7a4f}.rate.good{background:#2fa874}.rate.fair{background:var(--warn)}.rate.poor{background:var(--bad)}
+table.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+table.tbl th,table.tbl td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left}
+table.tbl th{background:#f0f6f3;color:var(--slate);font-weight:700;font-size:12.5px}
+table.tbl td.num,table.tbl th.num{text-align:right;font-variant-numeric:tabular-nums}
+table.tbl tr:last-child td{border-bottom:none}
+.tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.tabs button{padding:9px 16px;border:1.5px solid var(--line);background:#fff;border-radius:7px;font-weight:600;
+  font-size:14px;cursor:pointer;color:var(--muted);font-family:inherit}
+.tabs button.active{background:var(--green);color:#fff;border-color:var(--green)}
+.note{font-size:12px;color:var(--muted);margin-top:12px}
+.assume{background:#f7faf8;border:1px dashed #cfdcd6;border-radius:9px;padding:12px 16px;margin-top:14px;font-size:12.5px;color:var(--muted)}
+.assume b{color:var(--slate)}
+.pill{display:inline-block;background:var(--green-light);color:var(--green-dark);font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:12px;margin:2px 4px 2px 0}
+.add-row{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px}
+.add-row .field{margin-bottom:0;flex:1;min-width:110px}
+.muted{color:var(--muted)}
+details.kb{background:#fff;border:1px solid var(--line);border-radius:9px;padding:4px 16px;margin-bottom:10px}
+details.kb summary{cursor:pointer;font-weight:600;padding:11px 0}
+details.kb p{color:var(--muted);font-size:13.5px}
+.callcard{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border-radius:var(--radius);
+  padding:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.callcard h3{color:#fff;margin:0}.callcard .btn{background:#fff;color:var(--green-dark)}
+.upload{border:2px dashed #b8d8c7;border-radius:9px;padding:24px;text-align:center;color:var(--muted);cursor:pointer;background:#fbfdfc}
+.upload:hover{border-color:var(--green);background:var(--green-light)}
+.thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.thumbs img{width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.hidden{display:none}
+.monthgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.monthgrid .field{margin-bottom:0}
+.designcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.designcard.hi{border:2px solid var(--green);box-shadow:var(--shadow-lg)}
+.designcard h4{font-size:16px;display:flex;align-items:center;gap:8px}
+.tagchip{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:5px;background:var(--green-light);color:var(--green-dark)}
+
+/* Masthead */
+.mast{background:radial-gradient(1200px 400px at 80% -50%,rgba(47,168,116,.25),transparent),linear-gradient(160deg,#0a4731,#0f7a4f 75%);color:#fff;padding:34px 0}
+.mast h1{font-size:30px;max-width:760px;letter-spacing:-.4px}
+.mast p{font-size:15.5px;max-width:660px;opacity:.95;margin:8px 0 0}
+.trust{display:flex;gap:22px;margin-top:18px;flex-wrap:wrap;font-size:12.5px;opacity:.92}
+.trust span{display:flex;align-items:center;gap:7px}
+
+footer.ft{background:#0a2018;color:#bcd6cc;padding:40px 0;font-size:13.5px}
+footer.ft a{color:#8fe0bb}
+.footgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:22px}
+@media(max-width:900px){.c3,.c4,.split,.footgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){
+  .c2,.c3,.c4,.split,.fg2,.fg3,.footgrid{grid-template-columns:1fr}
+  .monthgrid{grid-template-columns:repeat(3,1fr)}
+  .mast h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="util"><div class="container">
+  <div>Data basis: <b>Global Solar Atlas / NASA POWER / World Bank ESMAP</b> long-term GHI methodology</div>
+  <div class="regions">Serving:<span>Australia</span><span>Canada</span><span>USA</span><span>UK</span><span>Singapore</span><span>Malaysia</span><span>+ Worldwide</span></div>
+</div></div>
+
+<header class="top"><div class="container nav">
+  <div class="brand">
+    <div class="logo">G</div>
+    <div><div class="bn">Green Tech Solar</div><div class="bt">Solar &amp; Renewable Energy Intelligence</div></div>
+  </div>
+  <div class="hbtns">
+    <a class="btn ghost sm" href="tel:+10000000000">&#128222; Push-to-Call</a>
+    <button class="btn sm" onclick="showTab('survey')">Get a Quote</button>
+  </div>
+</div></header>
+
+<nav class="tabbar"><div class="container"><div class="inner" id="tabbar"></div></div></nav>
+
+<div class="mast"><div class="container">
+  <h1>Professional-grade intelligence for solar &amp; renewable energy owners</h1>
+  <p>Benchmark your system against location-specific solar-resource data, design on-grid and hybrid systems, model ROI and storage, run full energy audits and investment analysis &mdash; all without sharing any inverter login.</p>
+  <div class="trust">
+    <span>&#9989; No credentials required</span>
+    <span>&#127758; Global GHI database</span>
+    <span>&#128202; Engineering-economics suite</span>
+    <span>&#128274; Your data stays on your device</span>
+  </div>
+</div></div>
+
+<main class="container">
+<!-- =================== BENCHMARK =================== -->
+<section class="panel active" id="benchmark">
+ <div class="phead"><span class="tag">Core feature</span>
+  <h2>Benchmark My Solar System</h2>
+  <p>Enter the figures you already read from your own inverter app. We compare your real generation against the long-term solar resource (GHI) for your exact location and against industry yield benchmarks, score your system, value your battery, and tell you how to extract more value.</p>
+ </div>
+ <div class="split">
+  <div class="tool">
+   <h3>1 &middot; Location &amp; system</h3>
+   <div class="sub">No logins, no credentials &mdash; everything is typed in manually.</div>
+   <div class="fg2">
+    <div class="field"><label>Country</label><select id="bm_country" onchange="fillCities('bm_country','bm_city')"></select></div>
+    <div class="field"><label>City / region</label><select id="bm_city"></select>
+     <div class="hint">No city listed? Pick &ldquo;Country average&rdquo;.</div></div>
+    <div class="field"><label>System size (kWp)</label><input id="bm_kwp" type="number" value="6.6" step="0.1"></div>
+    <div class="field"><label>Tilt / orientation quality</label>
+     <select id="bm_orient"><option value="1">Optimal (good tilt, sun-facing)</option><option value="0.95">Good</option><option value="0.88">Average / mixed</option><option value="0.78">Poor (shaded / flat E-W)</option></select></div>
+    <div class="field"><label>Data period</label>
+     <select id="bm_period" onchange="syncDays()"><option value="365">Full year</option><option value="91">One quarter</option><option value="30">One month</option><option value="custom">Custom days</option></select></div>
+    <div class="field"><label>Days in period</label><input id="bm_days" type="number" value="365"></div>
+   </div>
+   <h3 style="margin-top:14px">2 &middot; Energy &amp; tariffs</h3>
+   <div class="fg2">
+    <div class="field"><label>Total PV generated (kWh)</label><input id="bm_gen" type="number" value="9200"></div>
+    <div class="field"><label>Self-consumed (kWh)</label><input id="bm_self" type="number" value="3500"></div>
+    <div class="field"><label>Exported to grid (kWh)</label><input id="bm_exp" type="number" value="5700"></div>
+    <div class="field"><label>Grid import price (per kWh)</label><input id="bm_imp" type="number" value="0.30" step="0.01"></div>
+    <div class="field"><label>Export / feed-in price (per kWh)</label><input id="bm_fit" type="number" value="0.07" step="0.01"></div>
+    <div class="field"><label>Currency</label><select id="bm_cur"></select></div>
+   </div>
+   <h3 style="margin-top:14px">3 &middot; Battery storage</h3>
+   <div class="field" style="max-width:280px"><label>Does the system have a battery?</label>
+    <select id="bm_batt" onchange="toggleBatt()"><option value="no">No battery</option><option value="yes">Yes &mdash; battery installed</option></select></div>
+   <div id="bm_battfields" class="hidden">
+    <div class="fg3">
+     <div class="field"><label>Battery type</label><select id="bm_battype"><option value="0.80">Lead-acid (flooded)</option><option value="0.85">VRLA / AGM / Gel</option><option value="0.95" selected>Lithium (LFP / NMC)</option></select></div>
+     <div class="field"><label>Usable capacity (kWh)</label><input id="bm_battkwh" type="number" value="10"></div>
+     <div class="field"><label>Units charged in (kWh)</label><input id="bm_battchg" type="number" value="2800"></div>
+     <div class="field"><label>Units discharged (kWh)</label><input id="bm_battdis" type="number" value="2500"></div>
+     <div class="field"><label>Of which exported to grid (kWh)</label><input id="bm_battexp" type="number" value="0"></div>
+    </div>
+   </div>
+   <button class="btn block" style="margin-top:8px" onclick="runBenchmark()">Benchmark my system</button>
+   <div class="assume"><b>Method:</b> Expected specific yield = GHI &times; performance ratio (0.80) &times; orientation factor. Your specific yield = annualised generation &divide; kWp. Battery benefit = self-discharged kWh &times; import price, plus any battery exports &times; feed-in price, adjusted for round-trip efficiency by chemistry.</div>
+  </div>
+
+  <div>
+   <div class="result hidden" id="bm_res"></div>
+   <div class="card" id="bm_placeholder">
+    <div class="ico">&#128202;</div><h3>What you'll receive</h3>
+    <p>Your specific yield (kWh/kWp/yr), real Performance Ratio, a rating versus the expected yield for your exact location, a self-consumption score, the financial value of every energy flow including battery savings and battery exports, and a professional verdict on system health &mdash; plus the personalised value-optimiser below.</p>
+   </div>
+
+   <div class="tool" style="margin-top:18px">
+    <h3>Performance &amp; Value Insights</h3>
+    <div class="sub">Two layers: lift raw generation, then capture more value from every kWh.</div>
+    <div class="grid c2" style="margin-bottom:14px">
+     <div class="card"><div class="ico">&#128295;</div><h3>Raise generation</h3><p>Clean panels (soiling 5&ndash;20%), clear shading, check strings/optimisers, avoid inverter clipping, correct tilt/azimuth.</p></div>
+     <div class="card"><div class="ico">&#127968;</div><h3>Self-consume by day</h3><p>Shift dishwasher, laundry, pool pump, hot water and AC pre-cool into peak sun &mdash; worth your import price, not feed-in.</p></div>
+     <div class="card"><div class="ico">&#128267;</div><h3>Store for evening</h3><p>A battery shifts midday surplus to the evening peak. We size it and check the payback.</p></div>
+     <div class="card"><div class="ico">&#128663;</div><h3>Charge an EV on sun</h3><p>Turn ~7c export energy into near-free driving; we estimate solar-km and avoided fuel.</p></div>
+    </div>
+    <button class="btn" onclick="runInsights()">Generate my recommendations</button>
+    <div class="result hidden" id="ins_res"></div>
+    <div class="note">Run the benchmark first for figures personalised to your system.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- =================== SIZING & DESIGN =================== -->
+<section class="panel" id="sizing">
+ <div class="phead"><span class="tag">Engineering tool</span>
+  <h2>Solar System Sizing &amp; Design</h2>
+  <p>Enter your last 12 months of electricity consumption. We design two systems &mdash; an on-grid system optimised for daytime self-use and export, and a hybrid system that adds daytime battery charging for night-time use &mdash; then compare the benefits. Add a day/night demand split to size storage for a gradual move off-grid.</p>
+ </div>
+
+ <div class="tool">
+  <h3>1 &middot; Monthly electricity consumption (kWh)</h3>
+  <div class="sub">Type each month from your utility bills, or load a sample profile.</div>
+  <div class="monthgrid" id="month_inputs"></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+   <button class="btn ghost sm" onclick="fillMonths()">Load sample 12-month profile</button>
+   <span class="pill" id="month_total">Annual total: &mdash;</span>
+  </div>
+ </div>
+
+ <div class="tool" style="margin-top:18px">
+  <h3>2 &middot; Location, tariffs &amp; demand profile</h3>
+  <div class="fg3">
+   <div class="field"><label>Country</label><select id="sz_country" onchange="fillCities('sz_country','sz_city')"></select></div>
+   <div class="field"><label>City / region</label><select id="sz_city"></select></div>
+   <div class="field"><label>Currency</label><select id="sz_cur"></select></div>
+   <div class="field"><label>Grid import price (per kWh)</label><input id="sz_imp" type="number" value="0.30" step="0.01"></div>
+   <div class="field"><label>Feed-in price (per kWh)</label><input id="sz_fit" type="number" value="0.07" step="0.01"></div>
+   <div class="field"><label>Daytime demand share (%)</label><input id="sz_day" type="number" value="40">
+    <div class="hint">Roughly how much of your use is 9am&ndash;5pm. Nighttime = the rest.</div></div>
+   <div class="field"><label>PV installed cost (per kW)</label><input id="sz_pvcost" type="number" value="1000"></div>
+   <div class="field"><label>Battery cost (per kWh)</label><input id="sz_battcost" type="number" value="500"></div>
+   <div class="field"><label>Battery chemistry</label><select id="sz_chem"><option value="0.5,0.80">Lead-acid (DoD 50%)</option><option value="0.6,0.85">VRLA / AGM (DoD 60%)</option><option value="0.9,0.95" selected>Lithium LFP (DoD 90%)</option></select></div>
+  </div>
+  <button class="btn block" onclick="runSizing()">Design my systems</button>
+  <div class="assume"><b>Method:</b> Annual yield per kWp = GHI &times; 0.78 (system performance ratio). On-grid PV is sized to offset annual consumption; hybrid PV is upsized for round-trip battery losses. Battery is sized to your nightly demand at the selected depth-of-discharge. Off-grid sizing adds reserve autonomy.</div>
+ </div>
+ <div class="result hidden" id="sz_res" style="margin-top:18px;background:transparent;border:none;padding:0"></div>
+</section>
+<!-- =================== ROI =================== -->
+<section class="panel" id="roi">
+ <div class="phead"><span class="tag">For everyone</span>
+  <h2>Solar ROI Calculator &amp; Payback Period</h2>
+  <p>For prospective buyers and existing owners weighing an upgrade. Enter your electricity bill, choose your location, and we recommend a system size and report cost, annual savings, payback period and lifetime returns.</p>
+ </div>
+ <div class="split">
+  <div class="tool">
+   <h3>Your details</h3><div class="sub">Defaults are sensible starting points &mdash; edit anything.</div>
+   <div class="fg2">
+    <div class="field"><label>Country</label><select id="roi_country" onchange="fillCities('roi_country','roi_city')"></select></div>
+    <div class="field"><label>City / region</label><select id="roi_city"></select></div>
+    <div class="field"><label>Currency</label><select id="roi_cur"></select></div>
+    <div class="field"><label>Billing cycle</label><select id="roi_cycle"><option value="1">Monthly bill</option><option value="3">Quarterly bill</option></select></div>
+    <div class="field"><label>Average bill amount</label><input id="roi_bill" type="number" value="220"></div>
+    <div class="field"><label>Grid import price (per kWh)</label><input id="roi_rate" type="number" value="0.30" step="0.01"></div>
+    <div class="field"><label>Feed-in price (per kWh)</label><input id="roi_fit" type="number" value="0.07" step="0.01"></div>
+    <div class="field"><label>Daytime self-use share (%)</label><input id="roi_self" type="number" value="40"></div>
+    <div class="field"><label>Installed cost (per kW)</label><input id="roi_cost" type="number" value="1000"></div>
+   </div>
+   <button class="btn block" onclick="runRoi()">Calculate ROI &amp; payback</button>
+   <div class="assume"><b>Method:</b> Annual use = annual bill &divide; import price. System sized to offset that use (capped 20 kWp residential) using location yield. Savings = self-use &times; import price + exports &times; feed-in.</div>
+  </div>
+  <div>
+   <div class="result hidden" id="roi_res"></div>
+   <div class="card" id="roi_placeholder"><div class="ico">&#128176;</div><h3>What you'll receive</h3>
+    <p>Estimated annual consumption, a recommended PV size, expected generation, projected annual savings (self-use + exports), total cost, simple payback period, and indicative 25-year net savings.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- =================== SURVEY =================== -->
+<section class="panel" id="survey">
+ <div class="phead"><span class="tag">Get a real quote</span>
+  <h2>Virtual Site Survey &amp; Quotation</h2>
+  <p>Skip the first home visit. Upload photos of your roof and meter/switchboard, add a few details, and our engineers prepare a customised quote &mdash; or push-to-call us now.</p>
+ </div>
+ <div class="split">
+  <div class="tool">
+   <h3>Upload &amp; request quote</h3><div class="sub">Photos stay on your device in this build &mdash; nothing is uploaded.</div>
+   <div class="fg2">
+    <div class="field"><label>Full name</label><input id="sv_name" type="text" placeholder="Your name"></div>
+    <div class="field"><label>Phone / WhatsApp</label><input id="sv_phone" type="tel" placeholder="+__ ___ ___"></div>
+    <div class="field"><label>City / country</label><input id="sv_loc" type="text" placeholder="e.g. Sydney, AU"></div>
+    <div class="field"><label>Roof type</label><select id="sv_roof"><option>Tile</option><option>Metal / Colorbond</option><option>Concrete flat</option><option>Asphalt shingle</option><option>Other</option></select></div>
+   </div>
+   <div class="field"><label>Roof / array photos</label>
+    <label class="upload" for="sv_roofimg">&#128247; Tap to add roof photos</label>
+    <input id="sv_roofimg" type="file" accept="image/*" multiple style="display:none" onchange="previewImgs(this,'sv_roofthumbs')">
+    <div class="thumbs" id="sv_roofthumbs"></div></div>
+   <div class="field"><label>Meter / switchboard photo</label>
+    <label class="upload" for="sv_meterimg">&#9889; Tap to add meter / switchboard photo</label>
+    <input id="sv_meterimg" type="file" accept="image/*" multiple style="display:none" onchange="previewImgs(this,'sv_meterthumbs')">
+    <div class="thumbs" id="sv_meterthumbs"></div></div>
+   <button class="btn block" onclick="submitSurvey()">Request my custom quote</button>
+   <div class="result hidden" id="sv_res"></div>
+  </div>
+  <div>
+   <div class="callcard"><div><h3>Prefer to talk?</h3><p style="color:#dff3e8;margin:6px 0 0">Push-to-call our solar engineers for an instant chat.</p></div><a class="btn" href="tel:+10000000000">&#128222; Call now</a></div>
+   <div class="card" style="margin-top:18px"><h3>Why a virtual survey?</h3><p>Roof photos let us estimate usable area, orientation, shading and mounting; the meter photo tells us your phase, main-switch rating and metering type. Together that's enough for an accurate first quote with no site visit &mdash; saving days of back-and-forth.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- =================== KNOWLEDGE HUB =================== -->
+<section class="panel" id="knowledge">
+ <div class="phead"><span class="tag">Learn &amp; ask</span>
+  <h2>Renewable Energy Knowledge Hub</h2>
+  <p>News, explainers, queries and services across the whole clean-energy field. Browse a topic, then raise a question or request a service from our specialists.</p>
+ </div>
+ <div class="grid c3">
+  <div class="card"><div class="ico">&#9728;</div><h3>Solar Energy</h3><p>PV &amp; solar-thermal fundamentals, panel/inverter technology, system design, bifacial, tracking and emerging cells.</p></div>
+  <div class="card"><div class="ico">&#128268;</div><h3>Smart Grid Technology</h3><p>Demand response, smart meters, virtual power plants, grid-forming inverters and distributed-solar integration.</p></div>
+  <div class="card"><div class="ico">&#127807;</div><h3>BioEnergy</h3><p>Biomass, biogas, biofuels and waste-to-energy &mdash; feedstocks, conversion routes and applications.</p></div>
+  <div class="card"><div class="ico">&#128202;</div><h3>Energy Economics</h3><p>LCOE, tariffs, capacity markets, carbon pricing and clean-energy investment economics.</p></div>
+  <div class="card"><div class="ico">&#128220;</div><h3>Energy Policy</h3><p>Incentives, feed-in tariffs, net metering, renewable targets and regulation across markets.</p></div>
+  <div class="card"><div class="ico">&#128293;</div><h3>Hydrogen Technology</h3><p>Green vs blue hydrogen, electrolysis, storage, fuel cells and industrial decarbonisation.</p></div>
+  <div class="card"><div class="ico">&#128161;</div><h3>Energy Efficiency &amp; Conservation</h3><p>Practical measures for homes, business and industry &mdash; the cheapest kWh is the one you never use.</p></div>
+  <div class="card"><div class="ico">&#128267;</div><h3>Energy Storage</h3><p>Lithium &amp; flow batteries, thermal &amp; mechanical storage, and profitable sizing and operation.</p></div>
+  <div class="card"><div class="ico">&#127759;</div><h3>Energy &amp; Sustainable Development</h3><p>Energy access, the SDGs, just transition and energy's link to development.</p></div>
+ </div>
+ <div class="tool" style="margin-top:20px">
+  <h3>Ask the experts</h3><div class="sub">Send a query or request a service on any topic above.</div>
+  <div class="fg2">
+   <div class="field"><label>Topic</label><select id="kb_topic"><option>Solar Energy</option><option>Smart Grid</option><option>BioEnergy</option><option>Energy Economics</option><option>Energy Policy</option><option>Hydrogen</option><option>Energy Efficiency</option><option>Energy Storage</option><option>Sustainable Development</option></select></div>
+   <div class="field"><label>Your email</label><input id="kb_email" type="email" placeholder="you@email.com"></div>
+  </div>
+  <div class="field"><label>Your question or request</label><textarea id="kb_msg" rows="3" placeholder="Type your query..."></textarea></div>
+  <button class="btn" onclick="submitKb()">Send query</button>
+  <div class="result hidden" id="kb_res"></div>
+ </div>
+</section>
+<!-- =================== GREEN BUILDINGS =================== -->
+<section class="panel" id="buildings">
+ <div class="phead"><span class="tag">Low-carbon buildings</span>
+  <h2>Green &amp; Low-Energy Buildings</h2>
+  <p>Design, certify and operate low-carbon buildings &mdash; envelope heat-gain estimators, whole-life carbon, certification road-maps, and full ISO 50001 / EnMS implementation support.</p>
+ </div>
+ <div class="tabs" id="bld_tabs">
+  <button class="active" data-t="ottv" onclick="bldTab('ottv')">OTTV / RTTV Estimator</button>
+  <button data-t="carbon" onclick="bldTab('carbon')">Carbon Calculator</button>
+  <button data-t="cert" onclick="bldTab('cert')">Green Labelling</button>
+  <button data-t="enms" onclick="bldTab('enms')">EnMS / ISO 50001</button>
+ </div>
+ <div class="tool bld-pane" id="pane_ottv">
+  <h3>Envelope OTTV / RTTV Estimator</h3>
+  <div class="sub">Overall &amp; Roof Thermal Transfer Value &mdash; the heat-gain metric behind BCA Green Mark, GBI and similar codes. Lower is better.</div>
+  <div class="fg3">
+   <div class="field"><label>Window-to-wall ratio WWR</label><input id="ot_wwr" type="number" value="0.4" step="0.05"></div>
+   <div class="field"><label>Wall absorptance &alpha;</label><input id="ot_abs" type="number" value="0.6" step="0.05"></div>
+   <div class="field"><label>Wall U-value (W/m&sup2;K)</label><input id="ot_uw" type="number" value="2.0" step="0.1"></div>
+   <div class="field"><label>Glass U-value (W/m&sup2;K)</label><input id="ot_uf" type="number" value="5.6" step="0.1"></div>
+   <div class="field"><label>Glass shading coeff. SC</label><input id="ot_sc" type="number" value="0.5" step="0.05"></div>
+   <div class="field"><label>Correction factor CF</label><input id="ot_cf" type="number" value="0.9" step="0.05"></div>
+   <div class="field"><label>Roof U-value (W/m&sup2;K)</label><input id="ot_ur" type="number" value="0.6" step="0.05"></div>
+   <div class="field"><label>Skylight area ratio</label><input id="ot_sk" type="number" value="0.05" step="0.01"></div>
+   <div class="field"><label>Skylight SC</label><input id="ot_sksc" type="number" value="0.4" step="0.05"></div>
+  </div>
+  <button class="btn" onclick="runOttv()">Calculate OTTV &amp; RTTV</button>
+  <div class="result hidden" id="ot_res"></div>
+  <div class="assume">OTTV = 15(1&minus;WWR)&middot;&alpha;&middot;U<sub>w</sub> + 6&middot;WWR&middot;U<sub>f</sub> + 194&middot;CF&middot;WWR&middot;SC. Typical code limit &asymp; 50 W/m&sup2;.</div>
+ </div>
+ <div class="tool bld-pane" id="pane_carbon" style="display:none">
+  <h3>Embodied &amp; Operational Carbon Calculator</h3>
+  <div class="sub">Whole-life carbon: emissions locked into materials plus emissions from operating the building.</div>
+  <div class="fg3">
+   <div class="field"><label>Gross floor area (m&sup2;)</label><input id="cb_area" type="number" value="500"></div>
+   <div class="field"><label>Embodied intensity (kgCO&sub2;e/m&sup2;)</label><input id="cb_emb" type="number" value="500"></div>
+   <div class="field"><label>Energy use intensity (kWh/m&sup2;/yr)</label><input id="cb_eui" type="number" value="150"></div>
+   <div class="field"><label>Grid emission factor (kgCO&sub2;/kWh)</label><input id="cb_gef" type="number" value="0.5" step="0.05"></div>
+   <div class="field"><label>On-site renewable offset (%)</label><input id="cb_re" type="number" value="20"></div>
+   <div class="field"><label>Study period (years)</label><input id="cb_life" type="number" value="50"></div>
+  </div>
+  <button class="btn" onclick="runCarbon()">Calculate whole-life carbon</button>
+  <div class="result hidden" id="cb_res"></div>
+ </div>
+ <div class="tool bld-pane" id="pane_cert" style="display:none">
+  <h3>Green Labelling Assistance</h3>
+  <div class="sub">Pick a scheme for a plain-English road-map; we then guide you through documentation, modelling and certification.</div>
+  <div class="field" style="max-width:340px"><label>Certification scheme</label>
+   <select id="ct_scheme" onchange="showScheme()">
+    <option value="leed">LEED</option><option value="bca">BCA Green Mark</option><option value="breeam">BREEAM</option>
+    <option value="edge">EDGE</option><option value="gbi">GBI (Malaysia)</option><option value="greenre">GreenRE</option></select></div>
+  <div class="result" id="ct_res" style="background:#fff"></div>
+ </div>
+ <div class="tool bld-pane" id="pane_enms" style="display:none">
+  <h3>EnMS &amp; ISO 50001 Implementation</h3>
+  <div class="sub">Green Tech Solar drives operational excellence through expert ISO 50001 implementation and certification support &mdash; a robust Energy Management System tailored to your facility's energy profile.</div>
+  <p class="muted">Our methodology runs a Plan-Do-Check-Act cycle for continuous improvement, with a comprehensive Energy Audit as the diagnostic foundation that sets realistic baselines and surfaces efficiency gaps &mdash; shifting your organisation from passive consumption to active energy stewardship with significant, verified savings.</p>
+  <div class="grid c2" style="margin:14px 0">
+   <div class="card"><h3>EnMS Framework</h3><p>Plan-Do-Check-Act cycle, energy policy, objectives and review structure for continuous improvement.</p></div>
+   <div class="card"><h3>Technical Auditing</h3><p>In-depth analysis of loads, HVAC and solar integration to find and rank savings.</p></div>
+   <div class="card"><h3>Baselines &amp; EnPIs</h3><p>Energy baselines and performance indicators so progress is measured, not assumed.</p></div>
+   <div class="card"><h3>Compliance Support</h3><p>Guiding documentation and the internal-audit process through to certification.</p></div>
+  </div>
+  <table class="tbl"><thead><tr><th>Phase</th><th>Key activities</th></tr></thead><tbody>
+   <tr><td>1. Plan</td><td>Energy policy, scope &amp; boundaries, energy review, baseline, EnPIs, objectives &amp; targets.</td></tr>
+   <tr><td>2. Do</td><td>Operational controls, training, communication, documentation, implement action plans.</td></tr>
+   <tr><td>3. Check</td><td>Monitor &amp; measure, internal audit, management review, evaluate compliance.</td></tr>
+   <tr><td>4. Act</td><td>Corrective actions, continual improvement, prepare for certification audit.</td></tr>
+  </tbody></table>
+  <button class="btn" style="margin-top:16px" onclick="showTab('survey')">Request EnMS consultation</button>
+ </div>
+</section>
+
+<!-- =================== ENERGY AUDIT =================== -->
+<section class="panel" id="audit">
+ <div class="phead"><span class="tag">Diagnostic foundation</span>
+  <h2>Interactive Energy Audit</h2>
+  <p>Build a detailed energy audit by entering your loads. Choose Residential, Commercial or Industrial, add equipment, and we generate consumption breakdowns, an EUI benchmark, cost &amp; carbon, and prioritised recommendations.</p>
+ </div>
+ <div class="tabs">
+  <button class="active" data-a="res" onclick="auditTab('res')">Residential</button>
+  <button data-a="com" onclick="auditTab('com')">Commercial</button>
+  <button data-a="ind" onclick="auditTab('ind')">Industrial</button>
+ </div>
+ <div class="tool">
+  <div class="fg4 fg3"><div class="fg2" style="grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:0 14px">
+   <div class="field"><label>Floor area (m&sup2;)</label><input id="au_area" type="number" value="150"></div>
+   <div class="field"><label>Electricity price (per kWh)</label><input id="au_rate" type="number" value="0.30" step="0.01"></div>
+   <div class="field"><label>Grid emission factor</label><input id="au_gef" type="number" value="0.5" step="0.05"></div>
+   <div class="field"><label>Existing solar (kWh/yr)</label><input id="au_solar" type="number" value="0"></div>
+  </div></div>
+  <h4 style="margin-top:6px">Add equipment / loads</h4>
+  <div class="add-row">
+   <div class="field"><label>Name</label><input id="au_name" type="text" placeholder="e.g. Air conditioner"></div>
+   <div class="field"><label>Category</label><select id="au_cat"><option>HVAC / Cooling</option><option>Heating</option><option>Lighting</option><option>Refrigeration</option><option>Water heating</option><option>Plug loads / IT</option><option>Motors / Machinery</option><option>Cooking</option><option>Other</option></select></div>
+   <div class="field"><label>Power (W)</label><input id="au_pow" type="number" value="1500"></div>
+   <div class="field"><label>Qty</label><input id="au_qty" type="number" value="1"></div>
+   <div class="field"><label>Hrs/day</label><input id="au_hrs" type="number" value="6"></div>
+   <div class="field"><label>Days/yr</label><input id="au_days" type="number" value="300"></div>
+   <button class="btn sm" onclick="addLoad()">+ Add</button>
+  </div>
+  <table class="tbl" id="au_table"><thead><tr><th>Equipment</th><th>Category</th><th class="num">kWh/yr</th><th class="num">Cost</th><th></th></tr></thead><tbody id="au_body"><tr><td colspan="5" class="muted">No loads added yet &mdash; add equipment above, or load a sample set.</td></tr></tbody></table>
+  <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+   <button class="btn" onclick="runAudit()">Generate audit report</button>
+   <button class="btn ghost" onclick="loadSample()">Load sample loads</button>
+  </div>
+  <div class="result hidden" id="au_res"></div>
+ </div>
+</section>
+
+<!-- =================== ECONOMICS =================== -->
+<section class="panel" id="economics">
+ <div class="phead"><span class="tag">Investment analysis</span>
+  <h2>Economic Analysis of Energy Investments</h2>
+  <p>Run any energy project &mdash; solar, battery, retrofit, efficiency upgrade &mdash; through a full engineering-economics suite: NPV, future worth, annual worth, IRR, payback, benefit-cost ratio, plus sensitivity, breakeven and risk/probability analysis.</p>
+ </div>
+ <div class="tool">
+  <h3>Project inputs</h3>
+  <div class="fg4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0 14px">
+   <div class="field"><label>Initial investment</label><input id="ec_cap" type="number" value="12000"></div>
+   <div class="field"><label>Annual benefit / saving</label><input id="ec_ben" type="number" value="2200"></div>
+   <div class="field"><label>Annual operating cost</label><input id="ec_op" type="number" value="150"></div>
+   <div class="field"><label>Project life (years)</label><input id="ec_life" type="number" value="25"></div>
+   <div class="field"><label>Discount / MARR (%)</label><input id="ec_disc" type="number" value="6" step="0.5"></div>
+   <div class="field"><label>Salvage value</label><input id="ec_salv" type="number" value="0"></div>
+   <div class="field"><label>Benefit growth (%/yr)</label><input id="ec_grow" type="number" value="2" step="0.5"></div>
+   <div class="field"><label>Degradation (%/yr)</label><input id="ec_deg" type="number" value="0.5" step="0.1"></div>
+  </div>
+  <button class="btn block" onclick="runEcon()">Run full economic analysis</button>
+  <div class="result hidden" id="ec_res"></div>
+ </div>
+ <div class="grid c3" style="margin-top:18px">
+  <details class="kb"><summary>NPV / Net Present Worth</summary><p>Discounts all future cash flows to today at your MARR. NPV &gt; 0 means the project beats your required return.</p></details>
+  <details class="kb"><summary>Net Future Worth</summary><p>The same cash flows compounded to end of life &mdash; same signal as NPV, as a future lump sum.</p></details>
+  <details class="kb"><summary>Annual Worth (EUAW)</summary><p>NPV converted to an equivalent uniform annual amount &mdash; ideal for comparing different-length projects.</p></details>
+  <details class="kb"><summary>IRR</summary><p>The discount rate where NPV = 0. IRR &gt; MARR clears your hurdle.</p></details>
+  <details class="kb"><summary>Incremental ROR</summary><p>Return on the extra investment when choosing between two options.</p></details>
+  <details class="kb"><summary>Payback Period</summary><p>Years to recover the outlay &mdash; both simple and discounted.</p></details>
+  <details class="kb"><summary>Benefit-Cost Ratio</summary><p>PV of benefits &divide; PV of costs. BCR &gt; 1 means benefits outweigh costs.</p></details>
+  <details class="kb"><summary>Sensitivity Analysis</summary><p>How NPV shifts as the discount rate changes &mdash; revealing which assumptions matter.</p></details>
+  <details class="kb"><summary>Breakeven Analysis</summary><p>The annual benefit at which NPV = 0 &mdash; your minimum viable saving.</p></details>
+  <details class="kb"><summary>Risk &amp; Probability</summary><p>A Monte-Carlo spread estimates the probability of positive NPV under benefit uncertainty.</p></details>
+ </div>
+</section>
+<!--PANELS-->
+<!-- =================== FAULTS & ERRORS =================== -->
+<section class="panel" id="faults">
+ <div class="phead"><span class="tag">Support</span>
+  <h2>Faults &amp; Errors</h2>
+  <p>Something wrong with your installed solar system? Describe the fault, attach photos or a short video, and leave your WhatsApp and email. Our engineers will review it and get back to you.</p>
+ </div>
+ <div class="split">
+  <div class="tool">
+   <h3>Report a fault</h3><div class="sub">The more detail you give, the faster we can diagnose it.</div>
+   <div class="fg2">
+    <div class="field"><label>Fault type</label><select id="ft_type">
+      <option>No / low generation</option><option>Inverter error code</option><option>Inverter / display offline</option>
+      <option>Breaker tripping</option><option>Battery / storage issue</option><option>Physical damage (panels/wiring)</option>
+      <option>Monitoring / app not working</option><option>Unusual noise or overheating</option><option>Other</option></select></div>
+    <div class="field"><label>Inverter brand / model</label><input id="ft_brand" type="text" placeholder="e.g. Fronius Primo 5.0"></div>
+    <div class="field"><label>Error code shown (if any)</label><input id="ft_code" type="text" placeholder="e.g. State 567 / Arc Fault"></div>
+    <div class="field"><label>System location &amp; size</label><input id="ft_loc" type="text" placeholder="e.g. Sydney, 6.6 kW"></div>
+    <div class="field"><label>When did it start?</label><input id="ft_when" type="text" placeholder="e.g. 3 days ago / after a storm"></div>
+    <div class="field"><label>System age</label><input id="ft_age" type="text" placeholder="e.g. 2 years"></div>
+   </div>
+   <div class="field"><label>Describe the fault</label><textarea id="ft_desc" rows="4" placeholder="What is happening? Any warning lights, app messages, or changes in output?"></textarea></div>
+   <div class="field"><label>Photos / video of the fault</label>
+    <label class="upload" for="ft_media">&#128247; Tap to add photos or video (inverter screen, panels, meter, error message)</label>
+    <input id="ft_media" type="file" accept="image/*,video/*" multiple style="display:none" onchange="previewImgs(this,'ft_thumbs')">
+    <div class="thumbs" id="ft_thumbs"></div></div>
+   <div class="fg2">
+    <div class="field"><label>WhatsApp number</label><input id="ft_wa" type="tel" placeholder="+__ ___ ___ ___"></div>
+    <div class="field"><label>Email</label><input id="ft_email" type="email" placeholder="you@email.com"></div>
+   </div>
+   <button class="btn block" onclick="submitFault()">Submit fault report</button>
+   <div class="result hidden" id="ft_res"></div>
+  </div>
+  <div>
+   <div class="callcard"><div><h3>Urgent safety issue?</h3><p style="color:#dff3e8;margin:6px 0 0">Burning smell, sparks, smoke or exposed wiring &mdash; switch your system off at the isolator and call us immediately.</p></div><a class="btn" href="tel:+10000000000">&#128222; Call now</a></div>
+   <div class="card" style="margin-top:18px"><h3>What helps us diagnose fastest</h3>
+    <p>A clear photo of the inverter screen / error code, a photo of the meter or switchboard, when the problem started, and whether output dropped suddenly or gradually. A short video of any fault light or noise is ideal.</p></div>
+   <div class="card" style="margin-top:14px"><div class="ico">&#9889;</div><h3>Before you report</h3>
+    <p>Many &ldquo;faults&rdquo; are normal &mdash; low output on cloudy days, or an inverter that sleeps at night. Check the Benchmark tab first; it tells you whether your generation is genuinely below expectation.</p></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer class="ft"><div class="container">
+  <div class="footgrid">
+    <div>
+      <div class="brand" style="margin-bottom:10px"><div class="logo">G</div><div><div class="bn" style="color:#fff">Green Tech Solar</div></div></div>
+      <p style="max-width:330px">An intelligence platform for solar PV and renewable-energy users worldwide &mdash; benchmarking, design, audits, certification and EnMS implementation.</p>
+    </div>
+    <div><h4 style="color:#fff">Tools</h4><p><a href="#" onclick="showTab('benchmark');return false">Benchmarking</a><br><a href="#" onclick="showTab('sizing');return false">System Sizing</a><br><a href="#" onclick="showTab('roi');return false">ROI &amp; Payback</a><br><a href="#" onclick="showTab('audit');return false">Energy Audit</a></p></div>
+    <div><h4 style="color:#fff">Services</h4><p><a href="#" onclick="showTab('buildings');return false">Green Buildings</a><br><a href="#" onclick="showTab('buildings');return false">ISO 50001 / EnMS</a><br><a href="#" onclick="showTab('survey');return false">Site Survey</a><br><a href="#" onclick="showTab('economics');return false">Investment Analysis</a></p></div>
+    <div><h4 style="color:#fff">Knowledge</h4><p><a href="#" onclick="showTab('knowledge');return false">Renewable Hub</a><br><a href="#" onclick="showTab('knowledge');return false">Ask an expert</a></p></div>
+  </div>
+  <div style="margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);opacity:.7;font-size:12px">
+    &copy; <span id="yr"></span> Green Tech Solar. All estimates use long-term average solar-resource data and standard engineering assumptions, and are indicative for planning only. Confirm with a certified installer or energy professional before investing. GHI figures represent location/national long-term averages; where your exact city is unavailable, select &ldquo;Country average (all regions)&rdquo;.
+  </div>
+</div></footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+/* =================================================================
+   GLOBAL SOLAR RESOURCE DATABASE
+   Each entry: "Country":[national avg annual GHI kWh/m2/yr, {city:GHI,...}]
+   Peak-sun-hours/day = GHI/365. Values are long-term averages (Global
+   Solar Atlas / NASA POWER / World Bank ESMAP order of magnitude).
+   ================================================================= */
+const GEO={
+"Afghanistan":[1900,{"Kabul":1950,"Kandahar":2000,"Herat":2000,"Mazar-i-Sharif":1900}],
+"Albania":[1500,{"Tirana":1550}],"Algeria":[2000,{"Algiers":1750,"Oran":1800,"Tamanrasset":2300}],
+"Andorra":[1500,{}],"Angola":[1900,{"Luanda":1850}],"Antigua and Barbuda":[1950,{}],
+"Argentina":[1700,{"Buenos Aires":1600,"Cordoba":1750,"Mendoza":1900,"Salta":2000}],
+"Armenia":[1600,{"Yerevan":1650}],
+"Australia":[1700,{"Sydney":1600,"Melbourne":1380,"Brisbane":1750,"Perth":1950,"Adelaide":1680,"Canberra":1620,"Darwin":2050,"Hobart":1250,"Gold Coast":1700,"Cairns":1850,"Newcastle":1580,"Townsville":1950,"Alice Springs":2100}],
+"Austria":[1150,{"Vienna":1180,"Graz":1200,"Salzburg":1150,"Innsbruck":1200}],
+"Azerbaijan":[1500,{"Baku":1550}],"Bahamas":[1900,{"Nassau":1900}],"Bahrain":[2100,{"Manama":2100}],
+"Bangladesh":[1650,{"Dhaka":1650,"Chittagong":1680,"Khulna":1700}],"Barbados":[1950,{"Bridgetown":1950}],
+"Belarus":[1000,{"Minsk":1020}],"Belgium":[1050,{"Brussels":1050,"Antwerp":1040}],"Belize":[1800,{}],
+"Benin":[1900,{}],"Bhutan":[1700,{"Thimphu":1750}],"Bolivia":[1950,{"La Paz":2050,"Santa Cruz":1850}],
+"Bosnia and Herzegovina":[1350,{"Sarajevo":1350}],"Botswana":[2150,{"Gaborone":2150}],
+"Brazil":[1800,{"Sao Paulo":1650,"Rio de Janeiro":1700,"Brasilia":1950,"Salvador":1900,"Fortaleza":2050,"Manaus":1700,"Recife":1950,"Belo Horizonte":1850,"Porto Alegre":1650}],
+"Brunei":[1550,{}],"Bulgaria":[1450,{"Sofia":1450,"Plovdiv":1500}],"Burkina Faso":[2050,{"Ouagadougou":2050}],
+"Burundi":[1850,{}],"Cabo Verde":[2050,{}],"Cambodia":[1750,{"Phnom Penh":1750}],
+"Cameroon":[1700,{"Yaounde":1650,"Douala":1600}],
+"Canada":[1300,{"Toronto":1300,"Vancouver":1100,"Calgary":1400,"Montreal":1330,"Ottawa":1330,"Edmonton":1370,"Winnipeg":1420,"Quebec City":1300,"Halifax":1280,"Regina":1450,"Saskatoon":1440,"Victoria":1200}],
+"Central African Republic":[1850,{}],"Chad":[2150,{"N'Djamena":2150}],
+"Chile":[1950,{"Santiago":1950,"Antofagasta":2400,"Valparaiso":1850,"Concepcion":1600}],
+"China":[1450,{"Beijing":1500,"Shanghai":1350,"Guangzhou":1300,"Shenzhen":1350,"Chengdu":1050,"Lhasa":2150,"Kunming":1700,"Xi'an":1350,"Wuhan":1300,"Tianjin":1500,"Urumqi":1600}],
+"Colombia":[1650,{"Bogota":1600,"Medellin":1650,"Barranquilla":1900,"Cali":1700}],
+"Comoros":[1900,{}],"Congo (Republic)":[1650,{"Brazzaville":1650}],"Congo (DRC)":[1700,{"Kinshasa":1700,"Lubumbashi":1900}],
+"Costa Rica":[1750,{"San Jose":1750}],"Croatia":[1450,{"Zagreb":1350,"Split":1650}],
+"Cuba":[1850,{"Havana":1850}],"Cyprus":[1950,{"Nicosia":1950}],"Czechia":[1100,{"Prague":1080,"Brno":1150}],
+"Denmark":[1000,{"Copenhagen":1010,"Aarhus":1000}],"Djibouti":[2150,{"Djibouti":2150}],"Dominica":[1850,{}],
+"Dominican Republic":[1900,{"Santo Domingo":1900}],"Ecuador":[1650,{"Quito":1650,"Guayaquil":1600}],
+"Egypt":[2150,{"Cairo":2100,"Alexandria":1950,"Aswan":2400,"Giza":2100,"Luxor":2350}],
+"El Salvador":[1850,{"San Salvador":1850}],"Equatorial Guinea":[1600,{}],"Eritrea":[2150,{"Asmara":2200}],
+"Estonia":[950,{"Tallinn":960}],"Eswatini":[1950,{}],"Ethiopia":[2050,{"Addis Ababa":2100}],
+"Fiji":[1750,{"Suva":1700}],"Finland":[900,{"Helsinki":950,"Tampere":900,"Oulu":870}],
+"France":[1350,{"Paris":1150,"Marseille":1750,"Lyon":1300,"Nice":1700,"Toulouse":1450,"Bordeaux":1350,"Nantes":1300,"Strasbourg":1200}],
+"Gabon":[1550,{}],"Gambia":[2000,{"Banjul":2000}],"Georgia":[1450,{"Tbilisi":1500}],
+"Germany":[1080,{"Berlin":1050,"Munich":1200,"Hamburg":1000,"Frankfurt":1080,"Cologne":1040,"Stuttgart":1150,"Dusseldorf":1040,"Leipzig":1070}],
+"Ghana":[1850,{"Accra":1850,"Kumasi":1750}],"Greece":[1700,{"Athens":1750,"Thessaloniki":1600,"Heraklion":1850}],
+"Grenada":[1900,{}],"Guatemala":[1800,{"Guatemala City":1800}],"Guinea":[1850,{"Conakry":1850}],
+"Guinea-Bissau":[1950,{}],"Guyana":[1700,{}],"Haiti":[1900,{"Port-au-Prince":1900}],
+"Honduras":[1800,{"Tegucigalpa":1800}],"Hungary":[1250,{"Budapest":1250}],"Iceland":[850,{"Reykjavik":880}],
+"India":[1900,{"New Delhi":1900,"Mumbai":1850,"Bengaluru":1900,"Chennai":1950,"Kolkata":1750,"Hyderabad":1950,"Ahmedabad":2050,"Jaipur":2050,"Pune":1900,"Lucknow":1850,"Leh":2200}],
+"Indonesia":[1650,{"Jakarta":1650,"Surabaya":1700,"Bandung":1600,"Medan":1600,"Denpasar (Bali)":1750,"Makassar":1750}],
+"Iran":[2000,{"Tehran":1950,"Isfahan":2100,"Shiraz":2100,"Mashhad":2000,"Yazd":2200}],
+"Iraq":[2050,{"Baghdad":2050,"Basra":2050,"Mosul":2000}],"Ireland":[950,{"Dublin":950,"Cork":980}],
+"Israel":[2000,{"Jerusalem":2050,"Tel Aviv":2000,"Eilat":2200}],
+"Italy":[1550,{"Rome":1700,"Milan":1350,"Naples":1700,"Palermo":1850,"Turin":1350,"Florence":1550,"Bologna":1450,"Catania":1850}],
+"Ivory Coast":[1750,{"Abidjan":1750}],"Jamaica":[1950,{"Kingston":1950}],
+"Japan":[1400,{"Tokyo":1400,"Osaka":1450,"Sapporo":1250,"Fukuoka":1450,"Nagoya":1450,"Hiroshima":1450,"Naha (Okinawa)":1550}],
+"Jordan":[2100,{"Amman":2100,"Aqaba":2200}],"Kazakhstan":[1450,{"Almaty":1550,"Astana":1400}],
+"Kenya":[1950,{"Nairobi":1950,"Mombasa":1950}],"Kiribati":[2000,{}],"Kosovo":[1450,{"Pristina":1450}],
+"Kuwait":[2100,{"Kuwait City":2100}],"Kyrgyzstan":[1650,{"Bishkek":1600}],"Laos":[1650,{"Vientiane":1700}],
+"Latvia":[1000,{"Riga":1010}],"Lebanon":[1900,{"Beirut":1900}],"Lesotho":[2100,{"Maseru":2100}],
+"Liberia":[1650,{"Monrovia":1650}],"Libya":[2150,{"Tripoli":2050,"Benghazi":2100}],"Liechtenstein":[1200,{}],
+"Lithuania":[1000,{"Vilnius":1010}],"Luxembourg":[1080,{"Luxembourg":1080}],
+"Madagascar":[1950,{"Antananarivo":1950}],"Malawi":[1950,{"Lilongwe":1950}],
+"Malaysia":[1620,{"Kuala Lumpur":1640,"George Town (Penang)":1620,"Johor Bahru":1600,"Ipoh":1610,"Kuching":1550,"Kota Kinabalu":1650,"Malacca":1620,"Shah Alam":1630,"Petaling Jaya":1630}],
+"Maldives":[1950,{"Male":1950}],"Mali":[2150,{"Bamako":2100}],"Malta":[1950,{"Valletta":1950}],
+"Marshall Islands":[2000,{}],"Mauritania":[2150,{"Nouakchott":2150}],"Mauritius":[1850,{"Port Louis":1850}],
+"Mexico":[1950,{"Mexico City":1950,"Guadalajara":2000,"Monterrey":1900,"Tijuana":1950,"Cancun":1850,"Hermosillo":2150}],
+"Micronesia":[1800,{}],"Moldova":[1350,{"Chisinau":1350}],"Monaco":[1700,{}],"Mongolia":[1650,{"Ulaanbaatar":1600}],
+"Montenegro":[1550,{"Podgorica":1600}],"Morocco":[2050,{"Casablanca":1950,"Marrakesh":2150,"Rabat":1950,"Ouarzazate":2250}],
+"Mozambique":[1950,{"Maputo":1950}],"Myanmar":[1750,{"Yangon":1750,"Mandalay":1850,"Naypyidaw":1800}],
+"Namibia":[2250,{"Windhoek":2300}],"Nauru":[2000,{}],"Nepal":[1800,{"Kathmandu":1800,"Pokhara":1750}],
+"Netherlands":[1050,{"Amsterdam":1050,"Rotterdam":1050,"The Hague":1050,"Utrecht":1050}],
+"New Zealand":[1450,{"Auckland":1450,"Wellington":1400,"Christchurch":1450,"Hamilton":1430,"Dunedin":1350}],
+"Nicaragua":[1850,{"Managua":1850}],"Niger":[2150,{"Niamey":2150}],
+"Nigeria":[1900,{"Lagos":1750,"Abuja":1950,"Kano":2150,"Ibadan":1800,"Port Harcourt":1650}],
+"North Korea":[1350,{"Pyongyang":1380}],"North Macedonia":[1450,{"Skopje":1450}],"Norway":[900,{"Oslo":950,"Bergen":850}],
+"Oman":[2150,{"Muscat":2150,"Salalah":2050}],
+"Pakistan":[1950,{"Karachi":1950,"Lahore":1850,"Islamabad":1800,"Faisalabad":1900,"Quetta":2100,"Multan":1950,"Peshawar":1850}],
+"Palau":[1900,{}],"Palestine":[2000,{"Gaza":2000,"Ramallah":2050}],"Panama":[1750,{"Panama City":1750}],
+"Papua New Guinea":[1650,{"Port Moresby":1750}],"Paraguay":[1800,{"Asuncion":1800}],
+"Peru":[1850,{"Lima":1650,"Arequipa":2300,"Cusco":2050}],
+"Philippines":[1700,{"Manila":1700,"Cebu":1750,"Davao":1750,"Quezon City":1700}],
+"Poland":[1050,{"Warsaw":1050,"Krakow":1080,"Gdansk":1020}],"Portugal":[1800,{"Lisbon":1800,"Porto":1650,"Faro":1950}],
+"Qatar":[2100,{"Doha":2100}],"Romania":[1400,{"Bucharest":1450,"Cluj-Napoca":1350}],
+"Russia":[1100,{"Moscow":1050,"Saint Petersburg":950,"Novosibirsk":1200,"Yekaterinburg":1100,"Sochi":1450}],
+"Rwanda":[1850,{"Kigali":1850}],"Saint Kitts and Nevis":[1900,{}],"Saint Lucia":[1900,{}],
+"Saint Vincent and the Grenadines":[1900,{}],"Samoa":[1850,{}],"San Marino":[1550,{}],
+"Sao Tome and Principe":[1650,{}],
+"Saudi Arabia":[2150,{"Riyadh":2200,"Jeddah":2150,"Mecca":2200,"Medina":2250,"Dammam":2150,"Tabuk":2250}],
+"Senegal":[2000,{"Dakar":2000}],"Serbia":[1400,{"Belgrade":1400,"Novi Sad":1380}],"Seychelles":[1900,{"Victoria":1900}],
+"Sierra Leone":[1700,{"Freetown":1700}],"Singapore":[1580,{"Singapore (Central)":1580,"Jurong (West)":1590,"Changi (East)":1575}],
+"Slovakia":[1180,{"Bratislava":1200}],"Slovenia":[1300,{"Ljubljana":1300}],"Solomon Islands":[1700,{}],
+"Somalia":[2150,{"Mogadishu":2150}],
+"South Africa":[1950,{"Johannesburg":2050,"Cape Town":1950,"Durban":1700,"Pretoria":2050,"Port Elizabeth":1850,"Bloemfontein":2100}],
+"South Korea":[1400,{"Seoul":1380,"Busan":1450,"Incheon":1390,"Daegu":1430}],"South Sudan":[2050,{"Juba":2050}],
+"Spain":[1800,{"Madrid":1800,"Barcelona":1600,"Seville":1950,"Valencia":1750,"Malaga":1900,"Bilbao":1300,"Las Palmas":2050,"Zaragoza":1700}],
+"Sri Lanka":[1750,{"Colombo":1750,"Kandy":1700,"Jaffna":1900}],"Sudan":[2200,{"Khartoum":2250}],
+"Suriname":[1700,{}],"Sweden":[950,{"Stockholm":1000,"Gothenburg":980,"Malmo":1020}],
+"Switzerland":[1250,{"Zurich":1200,"Geneva":1300,"Bern":1250,"Lugano":1450}],"Syria":[1950,{"Damascus":2000,"Aleppo":1950}],
+"Taiwan":[1450,{"Taipei":1350,"Kaohsiung":1600,"Taichung":1500}],"Tajikistan":[1750,{"Dushanbe":1700}],
+"Tanzania":[1950,{"Dar es Salaam":1950,"Dodoma":2050}],"Thailand":[1700,{"Bangkok":1750,"Chiang Mai":1700,"Phuket":1700,"Pattaya":1750}],
+"Timor-Leste":[1800,{}],"Togo":[1850,{"Lome":1850}],"Tonga":[1850,{}],"Trinidad and Tobago":[1900,{"Port of Spain":1900}],
+"Tunisia":[1950,{"Tunis":1900,"Sfax":2000}],"Turkey":[1600,{"Istanbul":1450,"Ankara":1600,"Izmir":1750,"Antalya":1850,"Bursa":1500}],
+"Turkmenistan":[1800,{"Ashgabat":1800}],"Tuvalu":[2000,{}],"Uganda":[1900,{"Kampala":1900}],
+"Ukraine":[1200,{"Kyiv":1200,"Odesa":1350,"Lviv":1150}],
+"United Arab Emirates":[2100,{"Dubai":2100,"Abu Dhabi":2120,"Sharjah":2100,"Al Ain":2150}],
+"United Kingdom":[1000,{"London":1000,"Manchester":950,"Birmingham":980,"Glasgow":900,"Edinburgh":920,"Cardiff":1000,"Belfast":900,"Bristol":1050,"Leeds":960,"Liverpool":970,"Southampton":1080}],
+"United States":[1600,{"New York":1450,"Los Angeles":1900,"Phoenix":2100,"Chicago":1420,"Houston":1650,"San Francisco":1750,"Miami":1750,"Seattle":1150,"Denver":1750,"Boston":1400,"Las Vegas":2050,"Dallas":1700,"Atlanta":1550,"San Diego":1900,"Austin":1700,"Honolulu":1850,"Anchorage":950,"Philadelphia":1430,"Minneapolis":1400}],
+"Uruguay":[1650,{"Montevideo":1650}],"Uzbekistan":[1750,{"Tashkent":1700,"Samarkand":1800}],"Vanuatu":[1750,{}],
+"Vatican City":[1700,{}],"Venezuela":[1800,{"Caracas":1800,"Maracaibo":1950}],
+"Vietnam":[1650,{"Ho Chi Minh City":1750,"Hanoi":1450,"Da Nang":1650,"Can Tho":1750}],
+"Yemen":[2150,{"Sana'a":2200,"Aden":2150}],"Zambia":[2050,{"Lusaka":2050}],"Zimbabwe":[2050,{"Harare":2050,"Bulawayo":2100}]
+};
+
+/* Currencies */
+const CUR={USD:"$",EUR:"€",GBP:"£",AUD:"A$",CAD:"C$",NZD:"NZ$",SGD:"S$",MYR:"RM",INR:"₹",CNY:"¥",JPY:"¥",
+ BRL:"R$",ZAR:"R",AED:"AED ",SAR:"SAR ",PKR:"₨",IDR:"Rp",PHP:"₱",THB:"฿",VND:"₫",NGN:"₦",EGP:"E£",
+ MXN:"MX$",TRY:"₺",CHF:"CHF ",SEK:"kr ",NOK:"kr ",DKK:"kr ",PLN:"zł ",KRW:"₩",HKD:"HK$",QAR:"QR "};
+const COUNTRY_CUR={"Australia":"AUD","Canada":"CAD","United States":"USD","United Kingdom":"GBP",
+ "Singapore":"SGD","Malaysia":"MYR","New Zealand":"NZD","India":"INR","China":"CNY","Japan":"JPY",
+ "Brazil":"BRL","South Africa":"ZAR","United Arab Emirates":"AED","Saudi Arabia":"SAR","Pakistan":"PKR",
+ "Indonesia":"IDR","Philippines":"PHP","Thailand":"THB","Vietnam":"VND","Nigeria":"NGN","Egypt":"EGP",
+ "Mexico":"MXN","Turkey":"TRY","Switzerland":"CHF","Sweden":"SEK","Norway":"NOK","Denmark":"DKK",
+ "Poland":"PLN","South Korea":"KRW","Qatar":"QAR",
+ "Germany":"EUR","France":"EUR","Spain":"EUR","Italy":"EUR","Netherlands":"EUR","Ireland":"EUR","Portugal":"EUR","Greece":"EUR","Austria":"EUR","Belgium":"EUR","Finland":"EUR"};
+const PR_BENCH=0.80, PR_SYS=0.78;
+
+/* ---------- helpers ---------- */
+function num(id){return parseFloat(document.getElementById(id).value)||0;}
+function val(id){return document.getElementById(id).value;}
+function el(id){return document.getElementById(id);}
+function show(id){el(id).classList.remove('hidden');}
+function fmt(n,sym){sym=(sym===undefined?"$":sym);return sym+Math.round(n).toLocaleString();}
+function fmt1(n){return (Math.round(n*10)/10).toLocaleString();}
+function curSym(code){return CUR[code]||code+" ";}
+
+/* ---------- Tabs ---------- */
+const TABS=[["benchmark","Benchmark My System"],["sizing","System Sizing &amp; Design"],["roi","ROI &amp; Payback"],
+ ["survey","Site Survey &amp; Quote"],["faults","Faults &amp; Errors"],["knowledge","Knowledge Hub"],["buildings","Green Buildings"],
+ ["audit","Energy Audit"],["economics","Economic Analysis"]];
+function buildTabs(){
+ el('tabbar').innerHTML=TABS.map((t,i)=>`<button data-tab="${t[0]}" onclick="showTab('${t[0]}')"><span class="n">${i+1}</span>${t[1]}</button>`).join('');
+}
+function showTab(id){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- Geo dropdowns ---------- */
+const COUNTRY_NAMES=Object.keys(GEO).sort();
+function populateCountries(selId,def){
+ const s=el(selId);
+ s.innerHTML=COUNTRY_NAMES.map(c=>`<option${c===def?' selected':''}>${c}</option>`).join('');
+}
+function fillCities(countrySel,citySel){
+ const country=val(countrySel);
+ const cities=Object.keys(GEO[country][1]).sort();
+ el(citySel).innerHTML=`<option value="__avg">Country average (all regions)</option>`+
+   cities.map(c=>`<option>${c}</option>`).join('');
+ // sync currency if a paired currency select exists
+ const map={bm_country:'bm_cur',sz_country:'sz_cur',roi_country:'roi_cur'};
+ if(map[countrySel]){const code=COUNTRY_CUR[country]||"USD";el(map[countrySel]).value=code;}
+}
+function getGhi(countrySel,citySel){
+ const country=val(countrySel), city=val(citySel);
+ if(!city||city==="__avg"||!GEO[country][1][city])return GEO[country][0];
+ return GEO[country][1][city];
+}
+function populateCur(selId){
+ el(selId).innerHTML=Object.keys(CUR).map(k=>`<option value="${k}">${k} (${CUR[k].trim()})</option>`).join('');
+}
+
+/* ---------- INIT ---------- */
+function init(){
+ buildTabs();
+ ['bm_country','sz_country','roi_country'].forEach(id=>populateCountries(id,"Australia"));
+ ['bm_cur','sz_cur','roi_cur'].forEach(populateCur);
+ fillCities('bm_country','bm_city');
+ fillCities('sz_country','sz_city');
+ fillCities('roi_country','roi_city');
+ buildMonths();
+ showScheme();
+}
+/* ---------- BENCHMARK ---------- */
+function syncDays(){const p=val('bm_period');if(p!=='custom')el('bm_days').value=p;}
+function toggleBatt(){el('bm_battfields').classList.toggle('hidden',val('bm_batt')!=='yes');}
+function rating(p){if(p>=95)return['exc','Excellent'];if(p>=85)return['good','Good'];if(p>=70)return['fair','Fair'];return['poor','Under-performing'];}
+function runBenchmark(){
+ const ghi=getGhi('bm_country','bm_city'), sym=curSym(val('bm_cur'));
+ const kwp=num('bm_kwp'), gen=num('bm_gen'), self=num('bm_self'), exp=num('bm_exp');
+ let days=num('bm_days'); const per=val('bm_period'); if(per!=='custom')days=parseFloat(per);
+ if(kwp<=0||gen<=0||days<=0){alert('Enter system size, generation and a valid period.');return;}
+ const orient=parseFloat(val('bm_orient')), fit=num('bm_fit'), imp=num('bm_imp'), f=365/days;
+ const annGen=gen*f, actualSY=annGen/kwp, expectedSY=ghi*PR_BENCH*orient, pct=actualSY/expectedSY*100;
+ const realPR=annGen/(ghi*kwp), selfPct=gen>0?self/gen*100:0;
+ const [cls,label]=rating(pct);
+ let battRows="", battVal=0, battSelfSave=0, battExpRev=0, hasBatt=val('bm_batt')==='yes';
+ if(hasBatt){
+  const rte=parseFloat(val('bm_battype')), kwh=num('bm_battkwh'), chg=num('bm_battchg'), dis=num('bm_battdis'), bexp=num('bm_battexp');
+  const selfDis=Math.max(0,dis-bexp);
+  battSelfSave=selfDis*imp*f; battExpRev=bexp*fit*f; battVal=battSelfSave+battExpRev;
+  const actRte=chg>0?dis/chg*100:0, cycles=kwh>0?dis*f/kwh:0;
+  const chem=val('bm_battype')==='0.80'?'Lead-acid':val('bm_battype')==='0.85'?'VRLA/AGM':'Lithium';
+  battRows=`<tr><th>Battery (${chem}, ${kwh} kWh)</th><td class="num">~${cycles.toFixed(0)} full cycles/yr</td></tr>
+   <tr><th>Measured round-trip efficiency</th><td class="num">${actRte.toFixed(0)}% <span class="muted">(nameplate ~${(rte*100)}%)</span></td></tr>
+   <tr><th>Saving from battery self-use</th><td class="num">${fmt(battSelfSave,sym)}/yr</td></tr>
+   <tr><th>Revenue from battery export</th><td class="num">${fmt(battExpRev,sym)}/yr</td></tr>`;
+ }
+ const valSelf=self*imp*f, valExp=exp*fit*f, totVal=valSelf+valExp+battVal;
+ let verdict;
+ if(pct>=95)verdict="Your system is performing at or above the expected yield for this location. Keep monitoring and focus on capturing more <em>value</em> (see Insights).";
+ else if(pct>=85)verdict="Solid performance, slightly below the ideal for your location. Minor gains likely from cleaning, shading checks or a string inspection.";
+ else if(pct>=70)verdict="Noticeably below expected yield. Investigate soiling, shading, orientation or an under-performing inverter/string.";
+ else verdict="Significantly under-performing for this location. We recommend a fault check &mdash; possible inverter clipping, dead string, heavy shading or hardware fault.";
+ el('bm_placeholder').style.display='none';
+ el('bm_res').innerHTML=`
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><span class="rate ${cls}">${label}</span>
+   <strong>${Math.round(pct)}% of expected yield &middot; ${val('bm_city')==='__avg'?val('bm_country'):val('bm_city')}</strong></div>
+  <div class="bar"><span style="width:${Math.min(100,pct/1.2)}%"></span></div>
+  <div class="kpi-row">
+   <div class="kpi"><div class="v">${fmt1(actualSY)}</div><div class="l">Your specific yield (kWh/kWp/yr)</div></div>
+   <div class="kpi"><div class="v">${fmt1(expectedSY)}</div><div class="l">Expected for location</div></div>
+   <div class="kpi"><div class="v">${(realPR*100).toFixed(0)}%</div><div class="l">Performance ratio vs GHI</div></div>
+   <div class="kpi"><div class="v">${selfPct.toFixed(0)}%</div><div class="l">Self-consumption</div></div>
+  </div>
+  <table class="tbl" style="margin:10px 0">
+   <tr><th>Local solar resource (GHI)</th><td class="num">${ghi} kWh/m&sup2;/yr (${fmt1(ghi/365)} peak-sun-hrs/day)</td></tr>
+   <tr><th>Annualised generation</th><td class="num">${fmt1(annGen)} kWh/yr</td></tr>
+   <tr><th>Value of self-consumed PV</th><td class="num">${fmt(valSelf,sym)}/yr</td></tr>
+   <tr><th>Value of exported PV</th><td class="num">${fmt(valExp,sym)}/yr</td></tr>
+   ${battRows}
+   <tr><th>Total annual energy value</th><td class="num"><strong>${fmt(totVal,sym)}/yr</strong></td></tr>
+  </table>
+  <p style="margin:0">${verdict}</p>`;
+ show('bm_res');
+ window._bm={ghi,annGen,self,exp,gen,fit,imp,kwp,selfPct,pct,sym,hasBatt};
+}
+function runInsights(){
+ const b=window._bm; if(!b){alert('Run the benchmark above first.');return;}
+ const sym=b.sym, exportVal=b.exp*b.fit, asSelf=b.exp*b.imp, shiftGain=asSelf-exportVal;
+ const battKwh=Math.min(b.exp/365*0.6, b.kwp*1.5), battAnnual=battKwh*365*(b.imp-b.fit);
+ const evKm=b.exp*0.18*5, evSave=b.exp*0.7*b.imp;
+ let perfTip=b.pct<85?`Your yield is ${Math.round(b.pct)}% of expected &mdash; recover lost generation first (clean panels, check shading & strings). A 10% recovery is worth about ${fmt(b.annGen*0.10*b.imp,sym)}/yr.`:`Generation is healthy (${Math.round(b.pct)}% of expected) &mdash; focus on capturing more value below.`;
+ let battLine=b.hasBatt?`<tr><td>Optimise existing battery</td><td class="num">&mdash;</td><td>You already store energy &mdash; maximise daily cycling and prioritise self-use over export.</td></tr>`:`<tr><td>Add a home battery (~${fmt1(battKwh)} kWh)</td><td class="num">${fmt(battAnnual,sym)}</td><td>Store midday surplus, use it in the evening peak instead of importing.</td></tr>`;
+ el('ins_res').innerHTML=`<h4 style="margin-top:0">Your personalised opportunities</h4><p>${perfTip}</p>
+  <table class="tbl"><thead><tr><th>Move</th><th class="num">Est. annual upside</th><th>Why</th></tr></thead><tbody>
+   <tr><td>Self-consume more by day</td><td class="num">${fmt(shiftGain,sym)}</td><td>You export ${fmt1(b.exp)} kWh/yr at ${fmt(b.fit,sym)} but import at ${fmt(b.imp,sym)}. Shift loads to daytime.</td></tr>
+   ${battLine}
+   <tr><td>Charge an EV on solar</td><td class="num">${fmt(evSave,sym)}</td><td>~${Math.round(evKm).toLocaleString()} solar-km/yr from your surplus &mdash; avoided fuel cost.</td></tr>
+  </tbody></table>
+  <p class="note">Indicative, based on your benchmark inputs and simple tariff assumptions. A battery pays only if its cost &divide; annual saving is within its warranty life &mdash; ask us to model it precisely.</p>`;
+ show('ins_res');
+}
+
+/* ---------- SIZING & DESIGN ---------- */
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function buildMonths(){
+ el('month_inputs').innerHTML=MONTHS.map((m,i)=>`<div class="field"><label>${m} (kWh)</label><input id="m${i}" type="number" value="0" oninput="updateMonthTotal()"></div>`).join('');
+}
+function monthSum(){let t=0;for(let i=0;i<12;i++)t+=num('m'+i);return t;}
+function updateMonthTotal(){el('month_total').textContent='Annual total: '+fmt1(monthSum())+' kWh';}
+function fillMonths(){
+ const sample=[680,600,560,470,400,360,340,370,440,520,600,660]; // ~6000 kWh, summer-peaking
+ sample.forEach((v,i)=>el('m'+i).value=v); updateMonthTotal();
+}
+function runSizing(){
+ const annual=monthSum();
+ if(annual<=0){alert('Enter your monthly consumption, or load the sample profile.');return;}
+ const ghi=getGhi('sz_country','sz_city'), sym=curSym(val('sz_cur'));
+ const imp=num('sz_imp'), fit=num('sz_fit'), dayShare=Math.min(100,Math.max(0,num('sz_day')))/100, nightShare=1-dayShare;
+ const pvcost=num('sz_pvcost'), battcost=num('sz_battcost');
+ const [dod,rte]=val('sz_chem').split(',').map(parseFloat);
+ const ypk=ghi*PR_SYS, dailyAvg=annual/365;
+ const dayAnnual=annual*dayShare, nightAnnual=annual*nightShare, nightDaily=nightAnnual/365;
+ // On-grid
+ let kwpOn=Math.max(1,Math.round(annual/ypk*10)/10);
+ const genOn=kwpOn*ypk, selfOn=Math.min(dayAnnual,genOn), expOn=Math.max(0,genOn-selfOn);
+ const savOn=selfOn*imp+expOn*fit, costOn=kwpOn*pvcost, payOn=savOn>0?costOn/savOn:0, suffOn=selfOn/annual*100;
+ // Hybrid
+ const battUsable=nightDaily, battNom=Math.max(1,Math.round(battUsable/dod*2)/2);
+ let kwpHy=Math.max(1,Math.round((dayAnnual+nightAnnual/rte)/ypk*10)/10);
+ const genHy=kwpHy*ypk, directHy=Math.min(dayAnnual,genHy), surplus=Math.max(0,genHy-directHy);
+ let battIn=Math.min(surplus,battUsable*365/rte), battOut=Math.min(battIn*rte,nightAnnual);
+ const expHy=Math.max(0,surplus-battIn);
+ const savHy=directHy*imp+battOut*imp+expHy*fit, costHy=kwpHy*pvcost+battNom*battcost, payHy=savHy>0?costHy/savHy:0;
+ const suffHy=(directHy+battOut)/annual*100, gridHy=Math.max(0,annual-directHy-battOut);
+ // Off-grid (gradual)
+ const offUsable=nightDaily+dailyAvg*0.5, offBatt=Math.round(offUsable/dod*2)/2, offPv=Math.round(annual*1.3/ypk*10)/10;
+ el('sz_res').innerHTML=`
+  <div class="phead" style="margin-bottom:18px"><span class="tag">Your designs</span><h2 style="font-size:22px">Recommended systems for ${fmt1(annual)} kWh/yr</h2>
+   <p>Location yield: <b>${fmt1(ypk)} kWh/kWp/yr</b> (GHI ${ghi}). Demand split: ${(dayShare*100).toFixed(0)}% day / ${(nightShare*100).toFixed(0)}% night.</p></div>
+  <div class="grid c2">
+   <div class="designcard"><h4>&#9728; On-Grid System <span class="tagchip">Self-use + export</span></h4>
+    <div class="kpi-row">
+     <div class="kpi"><div class="v">${fmt1(kwpOn)} kWp</div><div class="l">PV size</div></div>
+     <div class="kpi"><div class="v">${fmt(savOn,sym)}</div><div class="l">Annual saving</div></div>
+     <div class="kpi"><div class="v">${payOn?fmt1(payOn)+' yr':'—'}</div><div class="l">Payback</div></div>
+    </div>
+    <table class="tbl">
+     <tr><th>Expected generation</th><td class="num">${fmt1(genOn)} kWh/yr</td></tr>
+     <tr><th>Daytime self-use</th><td class="num">${fmt1(selfOn)} kWh</td></tr>
+     <tr><th>Exported to grid</th><td class="num">${fmt1(expOn)} kWh</td></tr>
+     <tr><th>Energy self-sufficiency</th><td class="num">${suffOn.toFixed(0)}%</td></tr>
+     <tr><th>Estimated cost</th><td class="num">${fmt(costOn,sym)}</td></tr>
+    </table>
+    <p class="note">No battery: night-time load still drawn from the grid; surplus is exported at the feed-in rate.</p></div>
+   <div class="designcard hi"><h4>&#128267; Hybrid System <span class="tagchip">Self-use + storage + export</span></h4>
+    <div class="kpi-row">
+     <div class="kpi"><div class="v">${fmt1(kwpHy)} kWp</div><div class="l">PV size</div></div>
+     <div class="kpi"><div class="v">${fmt1(battNom)} kWh</div><div class="l">Battery</div></div>
+     <div class="kpi"><div class="v">${fmt(savHy,sym)}</div><div class="l">Annual saving</div></div>
+     <div class="kpi"><div class="v">${payHy?fmt1(payHy)+' yr':'—'}</div><div class="l">Payback</div></div>
+    </div>
+    <table class="tbl">
+     <tr><th>Expected generation</th><td class="num">${fmt1(genHy)} kWh/yr</td></tr>
+     <tr><th>Daytime direct self-use</th><td class="num">${fmt1(directHy)} kWh</td></tr>
+     <tr><th>Shifted to night via battery</th><td class="num">${fmt1(battOut)} kWh</td></tr>
+     <tr><th>Exported to grid</th><td class="num">${fmt1(expHy)} kWh</td></tr>
+     <tr><th>Energy self-sufficiency</th><td class="num">${suffHy.toFixed(0)}%</td></tr>
+     <tr><th>Estimated cost</th><td class="num">${fmt(costHy,sym)}</td></tr>
+    </table>
+    <p class="note">Battery sized to your nightly demand at ${(dod*100).toFixed(0)}% depth-of-discharge, ${(rte*100).toFixed(0)}% round-trip.</p></div>
+  </div>
+  <div class="tool" style="margin-top:18px"><h3>On-Grid vs Hybrid &mdash; benefits compared</h3>
+   <table class="tbl"><thead><tr><th>Metric</th><th class="num">On-Grid</th><th class="num">Hybrid</th><th>Verdict</th></tr></thead><tbody>
+    <tr><td>Annual saving</td><td class="num">${fmt(savOn,sym)}</td><td class="num">${fmt(savHy,sym)}</td><td>Hybrid saves ${fmt(savHy-savOn,sym)}/yr more by avoiding night imports</td></tr>
+    <tr><td>Energy self-sufficiency</td><td class="num">${suffOn.toFixed(0)}%</td><td class="num">${suffHy.toFixed(0)}%</td><td>Hybrid reaches +${(suffHy-suffOn).toFixed(0)} pts independence</td></tr>
+    <tr><td>Grid import remaining</td><td class="num">${fmt1(annual-selfOn)} kWh</td><td class="num">${fmt1(gridHy)} kWh</td><td>Hybrid cuts grid reliance ${(100-gridHy/(annual-selfOn||1)*100).toFixed(0)}% further</td></tr>
+    <tr><td>Upfront cost</td><td class="num">${fmt(costOn,sym)}</td><td class="num">${fmt(costHy,sym)}</td><td>Battery adds ${fmt(costHy-costOn,sym)}</td></tr>
+    <tr><td>Simple payback</td><td class="num">${payOn?fmt1(payOn)+' yr':'—'}</td><td class="num">${payHy?fmt1(payHy)+' yr':'—'}</td><td>${payOn&&payHy?(payOn<payHy?'On-grid pays back faster':'Hybrid is competitive'):''}</td></tr>
+    <tr><td>Blackout backup</td><td class="num">No</td><td class="num">Yes</td><td>Hybrid powers essentials during outages</td></tr>
+   </tbody></table>
+   <p class="note">On-grid maximises return per dollar; hybrid maximises independence, resilience and protection against rising tariffs / falling feed-in rates.</p>
+  </div>
+  <div class="tool" style="margin-top:18px"><h3>&#128268; Battery storage to gradually go off-grid</h3>
+   <p class="muted" style="font-size:14px">Based on your ${(nightShare*100).toFixed(0)}% night-time demand (${fmt1(nightDaily)} kWh/night) plus a half-day reserve for cloudy spells:</p>
+   <div class="kpi-row">
+    <div class="kpi"><div class="v">${fmt1(offBatt)} kWh</div><div class="l">Battery for near-autonomy</div></div>
+    <div class="kpi"><div class="v">${fmt1(offPv)} kWp</div><div class="l">Oversized PV (130% of load)</div></div>
+    <div class="kpi"><div class="v">${fmt(offBatt*battcost+offPv*pvcost,sym)}</div><div class="l">Indicative cost</div></div>
+   </div>
+   <p class="note">A staged path: start with the hybrid battery above, then expand storage toward this target. True 100% off-grid in winter/monsoon usually needs further PV oversizing or a backup generator &mdash; we model autonomy days on request.</p>
+  </div>`;
+ show('sz_res');
+}
+
+/* ---------- ROI ---------- */
+function runRoi(){
+ const ghi=getGhi('roi_country','roi_city'), sym=curSym(val('roi_cur'));
+ const bill=num('roi_bill'), cycle=parseFloat(val('roi_cycle')), rate=num('roi_rate'), fit=num('roi_fit');
+ const selfShare=num('roi_self')/100, costKw=num('roi_cost');
+ if(bill<=0||rate<=0){alert('Enter your bill and electricity price.');return;}
+ const annualBill=bill*(12/cycle), annualKwh=annualBill/rate, ypk=ghi*PR_SYS;
+ let size=Math.max(1.5,Math.min(20,annualKwh/ypk)); size=Math.round(size*10)/10;
+ const gen=size*ypk, selfUse=Math.min(gen*selfShare,annualKwh), exported=Math.max(0,gen-selfUse);
+ const savings=selfUse*rate+exported*fit, cost=size*costKw, payback=savings>0?cost/savings:0, net25=savings*25*0.92-cost;
+ el('roi_placeholder').style.display='none';
+ el('roi_res').innerHTML=`
+  <div class="kpi-row">
+   <div class="kpi"><div class="v">${fmt1(size)} kWp</div><div class="l">Recommended size</div></div>
+   <div class="kpi"><div class="v">${fmt(cost,sym)}</div><div class="l">Estimated cost</div></div>
+   <div class="kpi"><div class="v">${payback?fmt1(payback)+' yr':'—'}</div><div class="l">Simple payback</div></div>
+  </div>
+  <table class="tbl" style="margin-top:8px">
+   <tr><th>Your annual electricity use</th><td class="num">${fmt1(annualKwh)} kWh</td></tr>
+   <tr><th>Expected solar generation</th><td class="num">${fmt1(gen)} kWh/yr</td></tr>
+   <tr><th>Annual bill savings</th><td class="num">${fmt(savings,sym)}/yr</td></tr>
+   <tr><th>&nbsp;&nbsp;from self-use (${(selfShare*100).toFixed(0)}%)</th><td class="num">${fmt(selfUse*rate,sym)}</td></tr>
+   <tr><th>&nbsp;&nbsp;from exports</th><td class="num">${fmt(exported*fit,sym)}</td></tr>
+   <tr><th>Indicative 25-year net savings</th><td class="num"><strong>${fmt(net25,sym)}</strong></td></tr>
+  </table>
+  <p class="note">Sized for ${val('roi_city')==='__avg'?val('roi_country'):val('roi_city')} (yield ${fmt1(ypk)} kWh/kWp/yr). Capped at 20 kWp residential. Confirm with a site survey.</p>`;
+ show('roi_res');
+}
+
+/* ---------- Survey / KB ---------- */
+function previewImgs(input,target){const box=el(target);[...input.files].forEach(f=>{const img=document.createElement('img');img.src=URL.createObjectURL(f);box.appendChild(img);});}
+/* ================= SUBMISSION SETTINGS =================
+   Fill these in to receive customer reports & quote requests.
+   - BUSINESS_WA / BUSINESS_EMAIL enable one-tap WhatsApp / email sending (no server needed).
+   - SUBMIT_ENDPOINT (optional) is a form-backend URL (Formspree / Web3Forms / Getform / FormSubmit)
+     that STORES the submission and its uploaded files on a server. Leave blank for demo mode. */
+const BUSINESS_WA="";      // e.g. "61400000000" (country code, digits only, no +)
+const BUSINESS_EMAIL="";   // e.g. "support@greentechsolar.com"
+const SUBMIT_ENDPOINT="";  // e.g. "https://formspree.io/f/xxxxxxx" (optional)
+const FILES_FIELD="attachments";
+
+function deepLinks(subject,summary,nfiles){
+ const t=encodeURIComponent(summary), s=encodeURIComponent(subject);
+ let h='<div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">';
+ if(BUSINESS_WA) h+=`<a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/${BUSINESS_WA}?text=${t}">Send via WhatsApp</a>`;
+ if(BUSINESS_EMAIL) h+=`<a class="btn ghost sm" href="mailto:${BUSINESS_EMAIL}?subject=${s}&body=${t}">Send via Email</a>`;
+ h+='</div>';
+ if(!BUSINESS_WA&&!BUSINESS_EMAIL) h+='<p class="note">Tip: set your business WhatsApp / email in the code (BUSINESS_WA / BUSINESS_EMAIL) to enable one-tap sending here.</p>';
+ if(nfiles) h+='<p class="note">'+nfiles+' file(s) selected. Photos/videos cannot auto-attach to a WhatsApp or email link &mdash; please attach them in the chat, or set SUBMIT_ENDPOINT to upload them to a server automatically.</p>';
+ return h;
+}
+function finishSubmit(resId,okMsg,subject,summary,files,fields){
+ if(SUBMIT_ENDPOINT){
+  const fd=new FormData();
+  Object.keys(fields).forEach(k=>fd.append(k,fields[k]));
+  fd.append('summary',summary);
+  files.forEach((f,i)=>fd.append(FILES_FIELD+(files.length>1?'['+i+']':''),f));
+  el(resId).innerHTML='<strong>Sending&hellip;</strong>'; show(resId);
+  fetch(SUBMIT_ENDPOINT,{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+   .then(r=>{el(resId).innerHTML = r.ok
+      ? `<strong>${okMsg}</strong> Received &mdash; our team will be in touch shortly.`
+      : `<strong>Couldn't send automatically.</strong> Please use the buttons below.`+deepLinks(subject,summary,files.length);})
+   .catch(()=>{el(resId).innerHTML=`<strong>Network issue.</strong> Use the buttons below to send directly.`+deepLinks(subject,summary,files.length);});
+ } else {
+  el(resId).innerHTML=`<strong>${okMsg}</strong> Send it to us now:`+deepLinks(subject,summary,files.length);
+  show(resId);
+ }
+}
+function submitSurvey(){
+ const n=val('sv_name'),p=val('sv_phone');if(!n||!p){alert('Please add your name and phone.');return;}
+ const files=[...el('sv_roofimg').files,...el('sv_meterimg').files];
+ const summary=`GREEN TECH SOLAR - SITE SURVEY / QUOTE REQUEST\nName: ${n}\nPhone/WhatsApp: ${p}\nLocation: ${val('sv_loc')}\nRoof type: ${val('sv_roof')}\nPhotos attached: ${files.length}`;
+ finishSubmit('sv_res',`Thanks, ${n}! Your quote request is ready.`,'Site survey / quote request',summary,files,
+  {type:'Site survey',name:n,phone:p,location:val('sv_loc'),roof:val('sv_roof')});
+}
+function submitFault(){
+ const desc=val('ft_desc'),wa=val('ft_wa'),em=val('ft_email');
+ if(!desc||(!wa&&!em)){alert('Please describe the fault and give a WhatsApp number or email.');return;}
+ const files=[...el('ft_media').files];
+ const summary=`GREEN TECH SOLAR - FAULT REPORT\nFault type: ${val('ft_type')}\nInverter: ${val('ft_brand')}  Error code: ${val('ft_code')}\nLocation/size: ${val('ft_loc')}\nSystem age: ${val('ft_age')}\nStarted: ${val('ft_when')}\nDescription: ${desc}\nContact - WhatsApp: ${wa}  Email: ${em}\nMedia attached: ${files.length}`;
+ finishSubmit('ft_res','Fault report ready.','Solar fault report',summary,files,
+  {type:'Fault report',faultType:val('ft_type'),inverter:val('ft_brand'),errorCode:val('ft_code'),location:val('ft_loc'),systemAge:val('ft_age'),started:val('ft_when'),description:desc,whatsapp:wa,email:em});
+}
+function submitKb(){const e=val('kb_email'),m=val('kb_msg');if(!e||!m){alert('Add your email and your question.');return;}
+ el('kb_res').innerHTML=`<strong>Query sent.</strong> Our ${val('kb_topic')} specialist will reply to ${e}. In the live app this routes to the right expert and joins the searchable knowledge base.`;show('kb_res');}
+
+/* ---------- Buildings ---------- */
+function bldTab(t){document.querySelectorAll('#bld_tabs button').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+ document.querySelectorAll('.bld-pane').forEach(p=>p.style.display='none');el('pane_'+t).style.display='block';if(t==='cert')showScheme();}
+function runOttv(){
+ const wwr=num('ot_wwr'),abs=num('ot_abs'),uw=num('ot_uw'),uf=num('ot_uf'),sc=num('ot_sc'),cf=num('ot_cf'),ur=num('ot_ur'),sk=num('ot_sk'),sksc=num('ot_sksc');
+ const ottv=15*(1-wwr)*abs*uw+6*wwr*uf+194*cf*wwr*sc, rttv=12*(1-sk)*0.7*ur+6*sk*5.6+485*sk*sksc, limit=50, ok=ottv<=limit;
+ el('ot_res').innerHTML=`<div class="kpi-row">
+   <div class="kpi"><div class="v">${ottv.toFixed(1)}</div><div class="l">OTTV (W/m&sup2;)</div></div>
+   <div class="kpi"><div class="v">${rttv.toFixed(1)}</div><div class="l">RTTV (W/m&sup2;)</div></div>
+   <div class="kpi"><div class="v"><span class="rate ${ok?'exc':'poor'}">${ok?'Pass':'Over limit'}</span></div><div class="l">vs ${limit} W/m&sup2; limit</div></div></div>
+  <p style="margin:6px 0 0">${ok?'Your envelope meets a typical OTTV limit. To improve further, reduce WWR, use lower-SC glazing or lighter wall colours.':'OTTV exceeds the typical 50 W/m&sup2; limit. Reduce window-to-wall ratio, add external shading, switch to low-SC/low-U glazing, or lower wall absorptance.'}</p>`;show('ot_res');}
+function runCarbon(){
+ const area=num('cb_area'),emb=num('cb_emb'),eui=num('cb_eui'),gef=num('cb_gef'),re=num('cb_re')/100,life=num('cb_life');
+ const embodied=area*emb/1000, annualOp=area*eui*gef*(1-re)/1000, opLife=annualOp*life, total=embodied+opLife, perM2yr=total*1000/(area*life);
+ el('cb_res').innerHTML=`<div class="kpi-row">
+   <div class="kpi"><div class="v">${fmt1(embodied)} t</div><div class="l">Embodied CO&sub2;e</div></div>
+   <div class="kpi"><div class="v">${fmt1(annualOp)} t/yr</div><div class="l">Operational CO&sub2;e</div></div>
+   <div class="kpi"><div class="v">${fmt1(total)} t</div><div class="l">Whole-life (${life} yr)</div></div>
+   <div class="kpi"><div class="v">${perM2yr.toFixed(1)}</div><div class="l">kgCO&sub2;e/m&sup2;/yr</div></div></div>
+  <p style="margin:6px 0 0">Operational carbon is ${(opLife/total*100).toFixed(0)}% of whole-life emissions here. Cut it with efficiency, a cleaner grid factor and on-site renewables; cut embodied carbon with low-carbon concrete, recycled steel and timber.</p>`;show('cb_res');}
+const SCHEMES={
+ leed:["LEED (USGBC)","Global, points-based across Location, Water, Energy, Materials, Indoor Quality & Innovation. Certified / Silver / Gold / Platinum.",["Register project & set target level","Run energy model (ASHRAE 90.1 baseline)","Document credits & gather product data","Submit for review & respond to comments","Achieve certification"]],
+ bca:["BCA Green Mark (Singapore)","Tropical-focused; strong on energy efficiency & OTTV. Certified / Gold / GoldPlus / Platinum / SLE.",["Pre-assessment & target tier","OTTV/RTTV & energy modelling","Submit design documents to BCA","Site verification audit","Award & periodic re-certification"]],
+ breeam:["BREEAM (UK/Europe)","Lifecycle assessment across Management, Energy, Health, Materials, Waste, Land Use. Pass to Outstanding.",["Appoint BREEAM assessor","Set rating ambition at design stage","Evidence credits through design & construction","Assessor QA & BRE certification","Post-construction review"]],
+ edge:["EDGE (IFC)","Fast, free-software based; requires ≥20% savings in energy, water & embodied materials. Ideal for emerging markets.",["Model building in EDGE app","Hit 20/20/20% savings thresholds","Submit to EDGE auditor","On-site verification","EDGE / EDGE Advanced / Zero Carbon award"]],
+ gbi:["GBI (Malaysia)","Covers Energy Efficiency, Indoor Environment, Site, Materials, Water, Innovation. Certified to Platinum.",["Register with GBI","Design assessment submission","CVA (completion & verification) stage","Site audit","Certify, renew every 3 years"]],
+ greenre:["GreenRE (Malaysia)","Developer-led scheme aligned with REHDA; residential & non-residential tracks. Bronze to Platinum.",["Choose category & target","Energy & water modelling","Provisional certification at design","Final assessment on completion","Award & maintenance"]]
+};
+function showScheme(){const s=SCHEMES[val('ct_scheme')]||SCHEMES.leed;
+ el('ct_res').innerHTML=`<h4 style="margin:0 0 4px">${s[0]}</h4><p class="muted" style="margin:0 0 10px">${s[1]}</p>
+  <table class="tbl"><thead><tr><th>Step</th><th>What happens</th></tr></thead><tbody>${s[2].map((x,i)=>`<tr><td>${i+1}</td><td>${x}</td></tr>`).join('')}</tbody></table>
+  <p class="note">Green Tech Solar provides hands-on assistance at every step &mdash; modelling, documentation and liaison with the certifying body.</p>`;}
+
+/* ---------- Energy audit ---------- */
+let LOADS=[]; window._aud='res';
+function auditTab(a){document.querySelectorAll('#audit .tabs button').forEach(b=>b.classList.toggle('active',b.dataset.a===a));window._aud=a;}
+function addLoad(){const name=val('au_name')||'Load',cat=val('au_cat');const kwh=num('au_pow')*num('au_qty')*num('au_hrs')*num('au_days')/1000;LOADS.push({name,cat,kwh});renderLoads();el('au_name').value='';}
+function renderLoads(){const rate=num('au_rate'),body=el('au_body');
+ if(!LOADS.length){body.innerHTML='<tr><td colspan="5" class="muted">No loads added yet — add equipment above, or load a sample set.</td></tr>';return;}
+ body.innerHTML=LOADS.map((l,i)=>`<tr><td>${l.name}</td><td>${l.cat}</td><td class="num">${fmt1(l.kwh)}</td><td class="num">${fmt(l.kwh*rate,'')}</td><td><a href="#" onclick="LOADS.splice(${i},1);renderLoads();return false">&times;</a></td></tr>`).join('');}
+function loadSample(){const s=window._aud;
+ if(s==='com'){LOADS=[{name:"Central AC",cat:"HVAC / Cooling",kwh:48000},{name:"Lighting",cat:"Lighting",kwh:22000},{name:"Servers / IT",cat:"Plug loads / IT",kwh:18000},{name:"Lifts & pumps",cat:"Motors / Machinery",kwh:9000},{name:"Refrigeration",cat:"Refrigeration",kwh:7000}];el('au_area').value=1200;}
+ else if(s==='ind'){LOADS=[{name:"Process motors",cat:"Motors / Machinery",kwh:320000},{name:"Compressed air",cat:"Motors / Machinery",kwh:95000},{name:"Process heating",cat:"Heating",kwh:140000},{name:"HVAC",cat:"HVAC / Cooling",kwh:60000},{name:"Lighting",cat:"Lighting",kwh:40000}];el('au_area').value=5000;}
+ else{LOADS=[{name:"Air conditioner",cat:"HVAC / Cooling",kwh:2700},{name:"Water heater",cat:"Water heating",kwh:2200},{name:"Refrigerator",cat:"Refrigeration",kwh:600},{name:"Lighting",cat:"Lighting",kwh:500},{name:"Appliances & plug loads",cat:"Plug loads / IT",kwh:1400}];el('au_area').value=150;}
+ renderLoads();}
+const EUI_BENCH={res:[80,150],com:[150,250],ind:[300,600]};
+function runAudit(){
+ if(!LOADS.length){alert('Add at least one load, or click "Load sample loads".');return;}
+ const a=window._aud,area=num('au_area'),rate=num('au_rate'),gef=num('au_gef'),solar=num('au_solar');
+ const total=LOADS.reduce((s,l)=>s+l.kwh,0),net=Math.max(0,total-solar),cost=net*rate,co2=net*gef/1000,eui=area>0?total/area:0;
+ const [good,high]=EUI_BENCH[a];let cls,label;
+ if(eui<=good){cls='exc';label='Efficient';}else if(eui<=high){cls='fair';label='Typical';}else{cls='poor';label='High intensity';}
+ const byCat={};LOADS.forEach(l=>byCat[l.cat]=(byCat[l.cat]||0)+l.kwh);
+ const cats=Object.entries(byCat).sort((x,y)=>y[1]-x[1]);
+ const rows=cats.map(([c,k])=>`<tr><td>${c}</td><td class="num">${fmt1(k)}</td><td class="num">${(k/total*100).toFixed(0)}%</td></tr>`).join('');
+ const recs=[];const top=cats[0];
+ if(top)recs.push(`<b>${top[0]}</b> is your biggest load (${(top[1]/total*100).toFixed(0)}%) &mdash; prioritise efficiency here for the largest saving.`);
+ if(byCat['Lighting'])recs.push('Switch remaining lighting to LED with daylight/occupancy controls (40&ndash;60% lighting saving).');
+ if(byCat['HVAC / Cooling'])recs.push('Optimise HVAC set-points, maintenance and scheduling; consider high-efficiency units and better insulation.');
+ if(byCat['Motors / Machinery'])recs.push('Fit variable-speed drives and high-efficiency motors; fix compressed-air leaks.');
+ if(solar===0)recs.push(`A rooftop solar system could offset much of your ${fmt1(net)} kWh/yr &mdash; use the System Sizing tab to design it.`);
+ else recs.push('You already offset energy with solar &mdash; increase daytime self-consumption to maximise its value.');
+ recs.push('Implement an EnMS (ISO 50001) Plan-Do-Check-Act cycle to lock in and continually improve these savings.');
+ el('au_res').innerHTML=`<h4 style="margin-top:0">${a==='res'?'Residential':a==='com'?'Commercial':'Industrial'} energy audit report</h4>
+  <div class="kpi-row">
+   <div class="kpi"><div class="v">${fmt1(total)}</div><div class="l">Total use (kWh/yr)</div></div>
+   <div class="kpi"><div class="v">${fmt(cost,'')}</div><div class="l">Annual energy cost</div></div>
+   <div class="kpi"><div class="v">${fmt1(co2)} t</div><div class="l">CO&sub2; / yr</div></div>
+   <div class="kpi"><div class="v">${eui.toFixed(0)} <span class="rate ${cls}" style="font-size:11px">${label}</span></div><div class="l">EUI kWh/m&sup2;/yr (good &le;${good})</div></div></div>
+  <table class="tbl" style="margin:8px 0"><thead><tr><th>Category</th><th class="num">kWh/yr</th><th class="num">Share</th></tr></thead><tbody>${rows}</tbody></table>
+  <h4>Recommendations</h4><ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px">${recs.map(r=>`<li style="margin-bottom:6px">${r}</li>`).join('')}</ul>`;show('au_res');}
+
+/* ---------- Economics ---------- */
+function npv(rate,cap,flows,salv){let v=-cap;flows.forEach((f,i)=>v+=f/Math.pow(1+rate,i+1));v+=salv/Math.pow(1+rate,flows.length);return v;}
+function buildFlows(){const cap=num('ec_cap'),ben=num('ec_ben'),op=num('ec_op'),life=Math.max(1,Math.round(num('ec_life'))),grow=num('ec_grow')/100,deg=num('ec_deg')/100,salv=num('ec_salv');
+ const flows=[];for(let i=0;i<life;i++)flows.push(ben*Math.pow(1+grow,i)*Math.pow(1-deg,i)-op);return{cap,flows,salv,life};}
+function irr(cap,flows,salv){let lo=-0.9,hi=2,mid;const f=r=>npv(r,cap,flows,salv);if(f(lo)*f(hi)>0)return null;for(let i=0;i<100;i++){mid=(lo+hi)/2;const v=f(mid);if(Math.abs(v)<1)break;if(f(lo)*v<0)hi=mid;else lo=mid;}return mid;}
+function runEcon(){
+ const {cap,flows,salv,life}=buildFlows(),disc=num('ec_disc')/100;
+ const NPV=npv(disc,cap,flows,salv),NFW=NPV*Math.pow(1+disc,life),af=disc===0?life:(1-Math.pow(1+disc,-life))/disc,EUAW=NPV/af,IRR=irr(cap,flows,salv);
+ const pvBen=flows.reduce((s,f,i)=>s+Math.max(0,f)/Math.pow(1+disc,i+1),0)+salv/Math.pow(1+disc,life),BCR=pvBen/cap;
+ let cum=-cap,simple=null,c2=-cap,disco=null;
+ for(let i=0;i<flows.length;i++){cum+=flows[i];if(simple===null&&cum>=0)simple=i+1;c2+=flows[i]/Math.pow(1+disc,i+1);if(disco===null&&c2>=0)disco=i+1;}
+ const sens=[-0.02,-0.01,0,0.01,0.02].map(d=>{const r=disc+d;return `<tr><td>${(r*100).toFixed(1)}%</td><td class="num">${fmt(npv(r,cap,flows,salv),'')}</td></tr>`;}).join('');
+ const op=num('ec_op'),beEven=(cap-salv/Math.pow(1+disc,life))/af+op;
+ let pos=0,N=2000;for(let k=0;k<N;k++){const factor=0.75+Math.random()*0.5;if(npv(disc,cap,flows.map(f=>f*factor),salv)>0)pos++;}
+ const prob=pos/N*100,accept=NPV>0;
+ el('ec_res').innerHTML=`<div style="margin-bottom:8px"><span class="rate ${accept?'exc':'poor'}">${accept?'Accept — clears your hurdle rate':'Reject — below your required return'}</span></div>
+  <div class="kpi-row">
+   <div class="kpi"><div class="v">${fmt(NPV,'')}</div><div class="l">NPV @ ${(disc*100).toFixed(1)}%</div></div>
+   <div class="kpi"><div class="v">${IRR!==null?(IRR*100).toFixed(1)+'%':'—'}</div><div class="l">IRR</div></div>
+   <div class="kpi"><div class="v">${simple?simple+' yr':'—'}</div><div class="l">Simple payback</div></div>
+   <div class="kpi"><div class="v">${disco?disco+' yr':'—'}</div><div class="l">Discounted payback</div></div></div>
+  <table class="tbl" style="margin:8px 0">
+   <tr><th>Net Present Value (NPW)</th><td class="num">${fmt(NPV,'')}</td></tr>
+   <tr><th>Net Future Worth</th><td class="num">${fmt(NFW,'')}</td></tr>
+   <tr><th>Annual Worth (EUAW)</th><td class="num">${fmt(EUAW,'')}/yr</td></tr>
+   <tr><th>Benefit-Cost Ratio</th><td class="num">${BCR.toFixed(2)}</td></tr>
+   <tr><th>Breakeven annual benefit</th><td class="num">${fmt(beEven,'')}/yr</td></tr>
+   <tr><th>Probability of positive NPV (&plusmn;25% benefit)</th><td class="num">${prob.toFixed(0)}%</td></tr></table>
+  <h4 style="margin:10px 0 4px">Sensitivity &mdash; NPV vs discount rate</h4>
+  <table class="tbl"><thead><tr><th>Discount rate</th><th class="num">NPV</th></tr></thead><tbody>${sens}</tbody></table>
+  <p class="note">Incremental ROR: run two options here; the higher-capital choice is justified only if the IRR on the <em>extra</em> investment exceeds your MARR. Risk/uncertainty is reflected in the probability and sensitivity figures.</p>`;show('ec_res');}
+
+/* ---------- run init after all definitions ---------- */
+init();
+</script>
+</body>
+</html>
